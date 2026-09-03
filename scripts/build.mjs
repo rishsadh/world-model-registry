@@ -117,6 +117,8 @@ console.log(`Validation passed: ${data.exportable.length} exportable, ${data.str
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const mdCell = (s) => String(s).replace(/\|/g, '\\|').replace(/\r?\n/g, ' ');
 const CREDIT = 'Rish Sadh, founder of Reidify, an AI-first design studio in Mumbai.';
+const NAME = 'World model registry';
+const TAGLINE = 'What you actually get as a file, what it costs, and what you are allowed to do with it.';
 
 // ---------- README ----------
 
@@ -296,15 +298,16 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(data.meta.title)}</title>
+<title>${NAME}</title>
 <meta name="description" content="For every world model or scene generator: what you get as a file, what it costs, and what you are allowed to do with it. Every value quoted from the vendor's live page with the date.">
 <style>${css}</style>
 </head>
 <body>
 <main>
 <header>
-<h1>${esc(data.meta.title)}</h1>
-<p>For every world model or scene generator: what you actually get as a file, what it costs, and what you are allowed to do with it. Every figure and clause is quoted from the vendor's own page, with the date it was read.</p>
+<h1>${NAME}</h1>
+<p>${TAGLINE}</p>
+<p>For every world model or scene generator. Every figure and clause is quoted from the vendor's own page, with the date it was read.</p>
 <p class="muted">Version ${esc(data.meta.version)}. Last verified ${esc(data.meta.last_verified)}. ${data.exportable.length} exportable, ${data.streamed.length} streamed only, ${data.object_only.length} object-level names out of scope.</p>
 <p class="muted">${esc(data.meta.scope)}</p>
 </header>

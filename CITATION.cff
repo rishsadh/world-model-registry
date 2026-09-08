@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this registry, please cite it as below."
+type: dataset
+title: "World Model Registry"
+authors:
+  - given-names: Rish
+    family-names: Sadh
+version: "2"
+date-released: "2026-09-08"
+url: "https://rishsadh.com/world-model-registry"
+license: CC-BY-4.0
+abstract: "What you actually get as a file, what it costs, and what you are allowed to do with it. 9 tools that hand you a file, 7 that stream you a picture and give you none, 2 hosted wrappers and 2 announced but unavailable. Every figure and clause is quoted from the vendor's own page with the date it was read. No scores, no rankings, no comparison."

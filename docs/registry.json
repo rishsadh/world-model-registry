@@ -217,6 +217,15 @@
       "now": "listed",
       "source": "https://arxiv.org/abs/2511.16825",
       "read_on": "2026-09-08"
+    },
+    {
+      "date": "2026-09-08",
+      "entry_id": "marble",
+      "field": "notes, release cadence",
+      "was": "Release notes newest entry 2 April 2026, recorded 2026-09-03 with no elapsed-gap observation",
+      "now": "Release notes newest entry still 2 April 2026 on 2026-09-08, five months with no published release note, while Atlas launched 2026-09-01",
+      "source": "https://docs.worldlabs.ai/marble/release-notes",
+      "read_on": "2026-09-08"
     }
   ],
   "exportable": [
@@ -520,7 +529,7 @@
         "https://docs.worldlabs.ai/marble/support/faq.md",
         "https://www.worldlabs.ai/blog/atlas"
       ],
-      "notes": "Models selectable on 3 September 2026: Marble 1.0 Draft, Marble 1.0, Marble 1.1, Marble 1.1 Plus; the docs recommend Marble 1.1. The release notes page on the docs site ends at 2 April 2026. World Labs announced Atlas on 1 September 2026 as early access with select partners and states it will power future versions of Marble.",
+      "notes": "Models selectable on 8 September 2026: Marble 1.0 Draft, Marble 1.0, Marble 1.1, Marble 1.1 Plus; the docs recommend Marble 1.1. The release notes page still ends at 2 April 2026, five months with no published release note, while World Labs launched Atlas on 1 September 2026. Atlas is early access with select partners and World Labs states it will power future versions of Marble.",
       "contact_route": {
         "type": "email",
         "value": "support@worldlabs.ai",

@@ -7,8 +7,9 @@
     "canonical_url": "https://rishsadh.com/world-model-registry",
     "json_url": "https://rishsadh.com/world-model-registry/registry.json",
     "schema_url": "https://rishsadh.com/world-model-registry/schema.json",
-    "citation": "Rish Sadh, \"World Model Registry\", version 2, 2026-09-08. https://rishsadh.com/world-model-registry. Data CC BY 4.0.",
-    "interested_party": "This registry is maintained by Rish Sadh, founder of Reidify, a design studio in Mumbai. It takes no money from any vendor listed, publishes no scores or rankings, and records only what vendors publish, quoted with dates."
+    "citation": "Rish Sadh, \"World Model Registry\", version 2, 2026-09-08. https://rishsadh.com/world-model-registry. DOI 10.5281/zenodo.22653071. Data CC BY 4.0.",
+    "interested_party": "This registry is maintained by Rish Sadh, founder of Reidify, a design studio in Mumbai. It takes no money from any vendor listed, publishes no scores or rankings, and records only what vendors publish, quoted with dates.",
+    "doi": "10.5281/zenodo.22653071"
   },
   "changes": [
     {
@@ -225,6 +226,15 @@
       "was": "Release notes newest entry 2 April 2026, recorded 2026-09-03 with no elapsed-gap observation",
       "now": "Release notes newest entry still 2 April 2026 on 2026-09-08, five months with no published release note, while Atlas launched 2026-09-01",
       "source": "https://docs.worldlabs.ai/marble/release-notes",
+      "read_on": "2026-09-08"
+    },
+    {
+      "date": "2026-09-08",
+      "entry_id": "meta",
+      "field": "doi",
+      "was": "not published",
+      "now": "10.5281/zenodo.22653071",
+      "source": "https://doi.org/10.5281/zenodo.22653071",
       "read_on": "2026-09-08"
     }
   ],

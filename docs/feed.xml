@@ -9,7 +9,7 @@
 <author><name>Rish Sadh</name><uri>https://rishsadh.com</uri></author>
 <rights>Data CC BY 4.0</rights>
 <entry>
-<title>8 changes on 2026-09-08</title>
+<title>9 changes on 2026-09-08</title>
 <link href="https://rishsadh.com/world-model-registry#changes"/>
 <id>https://rishsadh.com/world-model-registry#changes-2026-09-08</id>
 <updated>2026-09-08T00:00:00Z</updated>
@@ -20,7 +20,8 @@ beeble-3d-scene-generator, listed: "not listed" to "listed". Source: https://www
 scenario-hy-world-multi-view-to-splat, listed: "not listed" to "listed". Source: https://www.scenario.com/models/hy-world-multi-view-to-splat (read 2026-09-08)
 worldlabs-atlas, listed: "not listed" to "listed". Source: https://www.worldlabs.ai/blog/atlas (read 2026-09-08)
 meta-worldgen, listed: "not listed" to "listed". Source: https://arxiv.org/abs/2511.16825 (read 2026-09-08)
-marble, notes, release cadence: "Release notes newest entry 2 April 2026, recorded 2026-09-03 with no elapsed-gap observation" to "Release notes newest entry still 2 April 2026 on 2026-09-08, five months with no published release note, while Atlas launched 2026-09-01". Source: https://docs.worldlabs.ai/marble/release-notes (read 2026-09-08)</summary>
+marble, notes, release cadence: "Release notes newest entry 2 April 2026, recorded 2026-09-03 with no elapsed-gap observation" to "Release notes newest entry still 2 April 2026 on 2026-09-08, five months with no published release note, while Atlas launched 2026-09-01". Source: https://docs.worldlabs.ai/marble/release-notes (read 2026-09-08)
+meta, doi: "not published" to "10.5281/zenodo.22653071". Source: https://doi.org/10.5281/zenodo.22653071 (read 2026-09-08)</summary>
 </entry>
 <entry>
 <title>16 changes on 2026-09-03</title>

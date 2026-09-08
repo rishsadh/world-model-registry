@@ -14,6 +14,7 @@ Every line carries the source the change was read from and the date it was read.
 - **worldlabs-atlas**, listed: "not listed" to "listed". Source: https://www.worldlabs.ai/blog/atlas (read 2026-09-08)
 - **meta-worldgen**, listed: "not listed" to "listed". Source: https://arxiv.org/abs/2511.16825 (read 2026-09-08)
 - **marble**, notes, release cadence: "Release notes newest entry 2 April 2026, recorded 2026-09-03 with no elapsed-gap observation" to "Release notes newest entry still 2 April 2026 on 2026-09-08, five months with no published release note, while Atlas launched 2026-09-01". Source: https://docs.worldlabs.ai/marble/release-notes (read 2026-09-08)
+- **meta**, doi: "not published" to "10.5281/zenodo.22653071". Source: https://doi.org/10.5281/zenodo.22653071 (read 2026-09-08)
 
 ## 2026-09-03
 

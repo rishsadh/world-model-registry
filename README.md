@@ -17,7 +17,7 @@ This registry is maintained by Rish Sadh, founder of Reidify, a design studio in
 ## Cite this
 
 ```
-Rish Sadh, "World Model Registry", version 2, 2026-09-08. https://rishsadh.com/world-model-registry. Data CC BY 4.0.
+Rish Sadh, "World Model Registry", version 2, 2026-09-08. https://rishsadh.com/world-model-registry. DOI 10.5281/zenodo.22653071. Data CC BY 4.0.
 ```
 
 `CITATION.cff` at the repository root carries the same string, so GitHub's "Cite this repository" button gives you this and nothing else. It is generated from `meta`, so it cannot drift from the page or the data.
@@ -40,7 +40,7 @@ Every entry keeps a stable anchor. `#marble` on the page and in this file point 
 
 ## What changed
 
-The newest ten of 24. Every row carries the page it was read from and the date it was read. Full history in [CHANGELOG.md](CHANGELOG.md); an Atom feed is generated at `docs/feed.xml`.
+The newest ten of 25. Every row carries the page it was read from and the date it was read. Full history in [CHANGELOG.md](CHANGELOG.md); an Atom feed is generated at `docs/feed.xml`.
 
 | Date | Entry | Field | Was | Now | Source | Read on |
 |---|---|---|---|---|---|---|
@@ -52,8 +52,8 @@ The newest ten of 24. Every row carries the page it was read from and the date i
 | 2026-09-08 | worldlabs-atlas | listed | not listed | listed | [source](https://www.worldlabs.ai/blog/atlas) | 2026-09-08 |
 | 2026-09-08 | meta-worldgen | listed | not listed | listed | [source](https://arxiv.org/abs/2511.16825) | 2026-09-08 |
 | 2026-09-08 | marble | notes, release cadence | Release notes newest entry 2 April 2026, recorded 2026-09-03 with no elapsed-gap observation | Release notes newest entry still 2 April 2026 on 2026-09-08, five months with no published release note, while Atlas launched 2026-09-01 | [source](https://docs.worldlabs.ai/marble/release-notes) | 2026-09-08 |
+| 2026-09-08 | meta | doi | not published | 10.5281/zenodo.22653071 | [source](https://doi.org/10.5281/zenodo.22653071) | 2026-09-08 |
 | 2026-09-03 | marble | listed | not listed | listed | [source](https://marble.worldlabs.ai/pricing) | 2026-09-03 |
-| 2026-09-03 | hunyuanworld-1-0 | listed | not listed | listed | [source](https://github.com/Tencent-Hunyuan/HunyuanWorld-1.0) | 2026-09-03 |
 
 ## Exportable
 

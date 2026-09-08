@@ -1,6 +1,6 @@
 // Build script for the world model output registry.
 // Node standard library only. Validates data/registry.json against data/schema.json,
-// then writes README.md (from templates/README.template.md) and dist/index.html.
+// then writes README.md, CHANGELOG.md, CITATION.cff and everything in docs/.
 // Output is deterministic: a second run produces no diff.
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
@@ -64,22 +64,59 @@ validate(data, schema, '$', errors);
 
 // ---------- Registry rules beyond the schema ----------
 
-const today = data.meta.last_verified;
-const all = [...data.exportable, ...data.streamed, ...data.object_only];
+const live = [...data.exportable, ...data.streamed];
+const dated = [...live, ...data.hosted_wrappers, ...data.announced];
+const all = [...dated, ...data.object_only];
 const ids = new Set();
 for (const e of all) {
   if (ids.has(e.id)) errors.push(`duplicate id ${e.id}`);
   ids.add(e.id);
-  if (e.last_verified !== today) errors.push(`${e.id}: last_verified ${e.last_verified} is not ${today}`);
+}
+
+// meta.last_verified is the newest entry date, not a value every entry must equal.
+// A registry that records change cannot require every entry to be re-read on the
+// same day; staleness is reported below instead, and it warns rather than fails.
+const newest = dated.map((e) => e.last_verified).sort().at(-1);
+if (data.meta.last_verified !== newest) {
+  errors.push(`meta.last_verified is ${data.meta.last_verified}, but the newest entry date is ${newest}`);
 }
 const host = (u) => new URL(u).hostname.replace(/^www\./, '');
 const rootOf = (h) => h.split('.').slice(-2).join('.');
 const sameOrg = (a, b) => host(a) === host(b) || rootOf(host(a)) === rootOf(host(b));
-for (const e of [...data.exportable, ...data.streamed]) {
+for (const e of dated) {
   if (e.sources.length < 2) errors.push(`${e.id}: fewer than two sources`);
   const vendorHosted = e.sources.some((s) => sameOrg(s, e.vendor_url));
-  const codeHosted = e.sources.some((s) => /github\.com|huggingface\.co/.test(host(s)));
+  const codeHosted = e.sources.some((s) => /github\.com|huggingface\.co|arxiv\.org/.test(host(s)));
   if (!vendorHosted && !codeHosted) errors.push(`${e.id}: no source on the vendor's own domain`);
+}
+
+// Every live entry publishes how its vendor can be reached for a correction, and
+// when it was first listed. Both are what make the correction loop auditable.
+for (const e of live) {
+  if (!e.contact_route) errors.push(`${e.id}: no contact_route`);
+  else if (e.contact_route.url !== 'not found' && !/^https?:\/\//.test(e.contact_route.url)) {
+    errors.push(`${e.id}: contact_route.url is neither a URL nor "not found"`);
+  }
+  if (!e.first_listed) errors.push(`${e.id}: no first_listed`);
+}
+
+// A change the reader cannot check is worse than no change at all.
+data.changes.forEach((c, i) => {
+  if (!/^https?:\/\//.test(c.source || '')) errors.push(`changes[${i}] (${c.entry_id}): source is not a URL`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(c.read_on || '')) errors.push(`changes[${i}] (${c.entry_id}): no read_on date`);
+  if (c.entry_id !== 'meta' && !ids.has(c.entry_id)) errors.push(`changes[${i}]: entry_id "${c.entry_id}" is not an entry or "meta"`);
+});
+
+// Two projects are called WorldGen. An alias that silently equals another entry's
+// name would merge them in a reader's head, so it has to be called out in notes.
+const namesById = new Map(all.map((e) => [e.id, e.name]));
+for (const e of all) {
+  for (const aka of e.also_known_as || []) {
+    const clash = [...namesById].find(([id, n]) => id !== e.id && n === aka);
+    if (clash && !/collision/i.test(e.notes || '')) {
+      errors.push(`${e.id}: also_known_as "${aka}" is another entry's name (${clash[0]}) and notes does not mention the collision`);
+    }
+  }
 }
 const sentenceCount = (s) => s.split(/(?<=[.!?])\s+/).filter(Boolean).length;
 for (const e of data.exportable) {
@@ -89,12 +126,12 @@ for (const e of data.exportable) {
   }
   if (sentenceCount(e.notes) > 3) errors.push(`${e.id}: notes has ${sentenceCount(e.notes)} sentences, max 3`);
 }
-for (const e of data.streamed) {
+for (const e of [...data.streamed, ...data.hosted_wrappers]) {
   if (e.notes && sentenceCount(e.notes) > 3) errors.push(`${e.id}: notes has ${sentenceCount(e.notes)} sentences, max 3`);
 }
 // Registry prose must be free of opinion words and em dashes. Verbatim quotes are exempt.
 const banned = /\b(impressive|limited|best for|revolutionary|game-changing|powerful|stunning|amazing)\b/i;
-const proseKey = /(^|\.)(notes|summary\.[a-z_]+|what_it_shows|why_no_export|price|scope)$/;
+const proseKey = /(^|\.)(notes|summary\.[a-z_]+|what_it_shows|why_no_export|price|scope|you_get|why_not_listed|access|underlying_model|interested_party)$/;
 const quoteKey = /(quote|conflict_quote|includes|limits|detail|dated)/;
 const scan = (obj, path) => {
   if (typeof obj === 'string') {
@@ -110,21 +147,58 @@ if (errors.length) {
   errors.forEach((e) => console.error('  ' + e));
   process.exit(1);
 }
-console.log(`Validation passed: ${data.exportable.length} exportable, ${data.streamed.length} streamed, ${data.object_only.length} object-level names.`);
+console.log(`Validation passed: ${data.exportable.length} exportable, ${data.streamed.length} streamed, ${data.hosted_wrappers.length} hosted wrappers, ${data.announced.length} announced, ${data.object_only.length} object-level names.`);
+
+// ---------- Staleness. Warns, never fails: an entry going stale is a fact to
+// report, not a reason to refuse to build. ----------
+const STALE_DAYS = 35;
+const DAY = 86400000;
+const asOf = Date.parse(data.meta.last_verified + 'T00:00:00Z');
+const age = (d) => Math.round((asOf - Date.parse(d + 'T00:00:00Z')) / DAY);
+const staleRows = dated
+  .map((e) => ({ id: e.id, last_verified: e.last_verified, days: age(e.last_verified) }))
+  .filter((r) => r.days > STALE_DAYS)
+  .sort((a, b) => b.days - a.days);
+console.log(`Staleness, ${STALE_DAYS} day threshold, as of ${data.meta.last_verified}:`);
+if (!staleRows.length) {
+  const oldest = dated.map((e) => age(e.last_verified)).sort((a, b) => b - a)[0];
+  console.log(`  none. Oldest entry is ${oldest} day(s) old.`);
+} else {
+  console.log('  entry'.padEnd(34) + 'last_verified'.padEnd(16) + 'days');
+  staleRows.forEach((r) => console.log('  ' + r.id.padEnd(32) + r.last_verified.padEnd(16) + r.days));
+  console.warn(`  ${staleRows.length} entr${staleRows.length === 1 ? 'y' : 'ies'} past ${STALE_DAYS} days. Re-read before the next release.`);
+}
 
 // ---------- Helpers ----------
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const mdCell = (s) => String(s).replace(/\|/g, '\\|').replace(/\r?\n/g, ' ');
 const CREDIT = 'Rish Sadh, founder of Reidify, an AI-first design studio in Mumbai.';
-const NAME = 'World model registry';
+// Everything a reader might quote back comes from meta, so the citation, the
+// page, the README and CITATION.cff cannot drift apart.
+const NAME = data.meta.title;
 const TAGLINE = 'What you actually get as a file, what it costs, and what you are allowed to do with it.';
+const M = data.meta;
+const DESCRIPTION = `${TAGLINE} ${data.exportable.length} tools that hand you a file, ${data.streamed.length} that stream you a picture and give you none, ${data.hosted_wrappers.length} hosted wrappers and ${data.announced.length} announced but unavailable. Every figure and clause is quoted from the vendor's own page with the date it was read. No scores, no rankings, no comparison.`;
+
+// Newest first, and stable: same date sorts by the order they were recorded.
+const changesNewestFirst = data.changes
+  .map((c, i) => ({ c, i }))
+  .sort((a, b) => (a.c.date === b.c.date ? a.i - b.i : (a.c.date < b.c.date ? 1 : -1)))
+  .map((x) => x.c);
+const changeDates = [...new Set(changesNewestFirst.map((c) => c.date))];
+const NEWEST_N = 10;
 
 // ---------- README ----------
 
 const exportableRows = data.exportable.map((e) => `| [${mdCell(e.name)}](#${e.id}) | ${mdCell(e.vendor)} | ${mdCell(e.summary.you_get)} | ${mdCell(e.summary.price)} | ${mdCell(e.summary.rights)} | ${mdCell(e.summary.local)} | ${e.last_verified} |`).join('\n');
 const streamedRows = data.streamed.map((e) => `| [${mdCell(e.name)}](#${e.id}) | ${mdCell(e.vendor)} | ${mdCell(e.what_it_shows)} | ${mdCell(e.why_no_export)} | ${mdCell(e.price)} | ${e.last_verified} |`).join('\n');
 const objectList = data.object_only.map((e) => `- ${e.name} (${e.vendor}): ${e.vendor_url}`).join('\n');
+const hostedRows = data.hosted_wrappers.map((e) => `| [${mdCell(e.name)}](#${e.id}) | ${mdCell(e.vendor)} | ${mdCell(e.underlying_model)} | ${mdCell(e.you_get)} | ${mdCell(e.price)} | ${e.last_verified} |`).join('\n');
+const announcedRows = data.announced.map((e) => `| [${mdCell(e.name)}](#${e.id}) | ${mdCell(e.vendor)} | ${e.announced_on} | ${mdCell(e.access)} | ${mdCell(e.why_not_listed)} | ${e.last_verified} |`).join('\n');
+const changeRows = changesNewestFirst.slice(0, NEWEST_N)
+  .map((c) => `| ${c.date} | ${mdCell(c.entry_id)} | ${mdCell(c.field)} | ${mdCell(c.was)} | ${mdCell(c.now)} | [source](${c.source}) | ${c.read_on} |`)
+  .join('\n');
 
 const mdClause = (c) => `- ${c.topic ? c.topic + '. ' : ''}Section ${c.section}: "${c.quote}" ([source](${c.url}))`;
 
@@ -173,22 +247,97 @@ function mdStreamedDetail(e) {
 
 const fill = (tpl, map) => Object.entries(map).reduce((s, [k, v]) => s.split(`{{${k}}}`).join(v), tpl);
 
+function mdHostedDetail(e) {
+  return [
+    `### ${e.name}`, '', `<a id="${e.id}"></a>`, '',
+    `Vendor: [${e.vendor}](${e.vendor_url}). Last verified ${e.last_verified}.`, '',
+    `**Underlying model:** ${e.underlying_model}`, '',
+    `**Registry entry for the underlying model:** ${e.underlying_entry_id === 'not published' ? 'not published' : `[${e.underlying_entry_id}](#${e.underlying_entry_id})`}`, '',
+    `**You get:** ${e.you_get}`, '',
+    `**Price:** ${e.price}`, '',
+    `**Notes:** ${e.notes}`, '',
+    '**Sources**', '',
+    ...e.sources.map((s) => `- ${s}`), '',
+  ].join('\n');
+}
+
+function mdAnnouncedDetail(e) {
+  return [
+    `### ${e.name}`, '', `<a id="${e.id}"></a>`, '',
+    `Vendor: [${e.vendor}](${e.vendor_url}). Announced ${e.announced_on}. Last verified ${e.last_verified}.`, '',
+    `**Access:** ${e.access}`, '',
+    `**Why it is not listed above:** ${e.why_not_listed}`, '',
+    '**Sources**', '',
+    ...e.sources.map((s) => `- ${s}`), '',
+  ].join('\n');
+}
+
 const readme = fill(read('templates/README.template.md'), {
   TITLE: data.meta.title,
   VERSION: data.meta.version,
   LAST_VERIFIED: data.meta.last_verified,
   SCOPE: data.meta.scope,
+  TAGLINE,
+  CITATION: data.meta.citation,
+  INTERESTED_PARTY: data.meta.interested_party,
+  CANONICAL_URL: data.meta.canonical_url,
+  JSON_URL: data.meta.json_url,
+  SCHEMA_URL: data.meta.schema_url,
   COUNT_EXPORTABLE: String(data.exportable.length),
   COUNT_STREAMED: String(data.streamed.length),
   COUNT_OBJECT: String(data.object_only.length),
+  COUNT_HOSTED: String(data.hosted_wrappers.length),
+  COUNT_ANNOUNCED: String(data.announced.length),
+  COUNT_CHANGES: String(data.changes.length),
+  CHANGE_TABLE: changeRows,
   EXPORTABLE_TABLE: exportableRows,
   STREAMED_TABLE: streamedRows,
+  HOSTED_TABLE: hostedRows,
+  ANNOUNCED_TABLE: announcedRows,
   OBJECT_LIST: objectList,
   EXPORTABLE_DETAILS: data.exportable.map(mdExportableDetail).join('\n'),
   STREAMED_DETAILS: data.streamed.map(mdStreamedDetail).join('\n'),
+  HOSTED_DETAILS: data.hosted_wrappers.map(mdHostedDetail).join('\n'),
+  ANNOUNCED_DETAILS: data.announced.map(mdAnnouncedDetail).join('\n'),
   CREDIT,
 });
 writeFileSync(join(root, 'README.md'), readme);
+
+// ---------- CHANGELOG.md ----------
+
+const changelog = [
+  `# Change log`, '',
+  `Generated from the \`changes\` array in \`data/registry.json\` by \`scripts/build.mjs\`. Do not edit this file by hand.`, '',
+  `Every line carries the source the change was read from and the date it was read. A change with no source is not recorded.`, '',
+  ...changeDates.flatMap((date) => [
+    `## ${date}`, '',
+    ...changesNewestFirst.filter((c) => c.date === date).map((c) =>
+      `- **${c.entry_id}**, ${c.field}: "${c.was}" to "${c.now}". Source: ${c.source} (read ${c.read_on})`),
+    '',
+  ]),
+].join('\n');
+writeFileSync(join(root, 'CHANGELOG.md'), changelog);
+
+// ---------- CITATION.cff ----------
+
+const cffStr = (s) => `"${String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
+const cff = [
+  'cff-version: 1.2.0',
+  'message: "If you use this registry, please cite it as below."',
+  'type: dataset',
+  `title: ${cffStr(M.title)}`,
+  'authors:',
+  '  - given-names: Rish',
+  '    family-names: Sadh',
+  `version: ${cffStr(M.version)}`,
+  `date-released: ${cffStr(M.last_verified)}`,
+  `url: ${cffStr(M.canonical_url)}`,
+  'license: CC-BY-4.0',
+  `abstract: ${cffStr(DESCRIPTION)}`,
+  ...(M.doi ? ['identifiers:', '  - type: doi', `    value: ${cffStr(M.doi)}`, '    description: "Concept DOI, all versions"'] : []),
+  '',
+].join('\n');
+writeFileSync(join(root, 'CITATION.cff'), cff);
 
 // ---------- HTML ----------
 
@@ -224,6 +373,10 @@ details summary::-webkit-details-marker{display:none}
 .panel .conflict{border-left:2px solid var(--fg);padding-left:.75rem;margin:.5rem 0}
 .panel a{word-break:break-all}
 .ok{white-space:nowrap}
+.cite{background:var(--mark);padding:.75rem 1rem;font-size:.9375rem;max-width:none}
+table.changes{font-size:.875rem;table-layout:fixed}
+table.changes td,table.changes th{padding:.5rem;overflow-wrap:anywhere}
+code{font-family:inherit;background:var(--mark);padding:0 .2em}
 footer{margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--line);font-size:.875rem;color:var(--muted)}
 footer p{margin:.25rem 0}
 @media (max-width:700px){
@@ -293,13 +446,108 @@ ${htmlSources(e)}
 </tbody>`;
 }
 
+function htmlHosted(e) {
+  const under = e.underlying_entry_id === 'not published'
+    ? 'not published'
+    : `<a href="#${esc(e.underlying_entry_id)}">${esc(e.underlying_entry_id)}</a>`;
+  return `<tbody class="entry" id="${e.id}">
+<tr>
+<td data-label="Tool"><h3>${esc(e.name)}</h3><span class="muted">${esc(e.vendor)}</span></td>
+<td data-label="Underlying model">${esc(e.underlying_model)}</td>
+<td data-label="You get">${esc(e.you_get)}</td>
+<td data-label="Price">${esc(e.price)}</td>
+<td data-label="Last verified" class="ok">${esc(e.last_verified)}</td>
+</tr>
+<tr class="detail"><td colspan="5"><details><summary>Notes and sources</summary><div class="panel">
+<h4>Registry entry for the underlying model</h4><p>${under}</p>
+<h4>Notes</h4><p>${esc(e.notes)}</p>
+${htmlSources(e)}
+</div></details></td></tr>
+</tbody>`;
+}
+
+function htmlAnnounced(e) {
+  return `<tbody class="entry" id="${e.id}">
+<tr>
+<td data-label="Tool"><h3>${esc(e.name)}</h3><span class="muted">${esc(e.vendor)}</span></td>
+<td data-label="Announced" class="ok">${esc(e.announced_on)}</td>
+<td data-label="Access">${esc(e.access)}</td>
+<td data-label="Why it is not listed above">${esc(e.why_not_listed)}</td>
+<td data-label="Last verified" class="ok">${esc(e.last_verified)}</td>
+</tr>
+<tr class="detail"><td colspan="5"><details><summary>Sources</summary><div class="panel">
+${htmlSources(e)}
+</div></details></td></tr>
+</tbody>`;
+}
+
+const htmlChangeRows = changesNewestFirst.slice(0, NEWEST_N).map((c) => `<tr>
+<td data-label="Date" class="ok">${esc(c.date)}</td>
+<td data-label="Entry">${c.entry_id === 'meta' ? 'meta' : `<a href="#${esc(c.entry_id)}">${esc(c.entry_id)}</a>`}</td>
+<td data-label="Field">${esc(c.field)}</td>
+<td data-label="Was">${esc(c.was)}</td>
+<td data-label="Now">${esc(c.now)}</td>
+<td data-label="Source"><a href="${esc(c.source)}">source</a></td>
+<td data-label="Read on" class="ok">${esc(c.read_on)}</td>
+</tr>`).join('\n');
+
+// ---------- Dataset JSON-LD ----------
+// Inline, so the page still makes zero external requests. Generated from meta,
+// so it cannot drift from the citation string or CITATION.cff.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Dataset',
+  name: M.title,
+  description: DESCRIPTION,
+  url: M.canonical_url,
+  identifier: M.doi ? `https://doi.org/${M.doi}` : M.canonical_url,
+  version: M.version,
+  license: 'https://creativecommons.org/licenses/by/4.0/',
+  citation: M.citation,
+  dateModified: M.last_verified,
+  keywords: ['world models', 'scene generation', 'gaussian splatting', '3D reconstruction', 'export formats', 'licensing', 'commercial rights'],
+  creator: {
+    '@type': 'Person',
+    name: 'Rish Sadh',
+    url: 'https://rishsadh.com',
+    affiliation: { '@type': 'Organization', name: 'Reidify', url: 'https://reidify.design' },
+  },
+  distribution: [{
+    '@type': 'DataDownload',
+    contentUrl: M.json_url,
+    encodingFormat: 'application/json',
+  }],
+  isAccessibleForFree: true,
+};
+
+// Prove the block is valid here rather than discovering it in a crawler.
+{
+  const round = JSON.parse(JSON.stringify(jsonLd));
+  const need = ['@type', 'name', 'description', 'url', 'identifier', 'version', 'license', 'citation', 'dateModified', 'keywords', 'creator', 'distribution'];
+  for (const k of need) if (round[k] === undefined) errors.push(`JSON-LD is missing ${k}`);
+  if (round['@type'] !== 'Dataset') errors.push('JSON-LD @type is not Dataset');
+  if (round.name !== 'World Model Registry') errors.push(`JSON-LD name is "${round.name}", expected "World Model Registry"`);
+  const dl = round.description.length;
+  if (dl < 50 || dl > 5000) errors.push(`JSON-LD description is ${dl} characters, must be 50 to 5000`);
+  if (!round.distribution?.[0]?.contentUrl) errors.push('JSON-LD distribution[0].contentUrl missing');
+  if (round.distribution?.[0]?.encodingFormat !== 'application/json') errors.push('JSON-LD distribution[0].encodingFormat missing');
+  if (errors.length) {
+    console.error(`JSON-LD validation failed with ${errors.length} error(s):`);
+    errors.forEach((e) => console.error('  ' + e));
+    process.exit(1);
+  }
+}
+
 const html = `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${NAME}</title>
-<meta name="description" content="For every world model or scene generator: what you get as a file, what it costs, and what you are allowed to do with it. Every value quoted from the vendor's live page with the date.">
+<meta name="description" content="${esc(DESCRIPTION)}">
+<link rel="canonical" href="${esc(M.canonical_url)}">
+<link rel="alternate" type="application/atom+xml" title="${esc(NAME)} change log" href="feed.xml">
+<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
 <style>${css}</style>
 </head>
 <body>
@@ -308,9 +556,30 @@ const html = `<!doctype html>
 <h1>${NAME}</h1>
 <p>${TAGLINE}</p>
 <p>For every world model or scene generator. Every figure and clause is quoted from the vendor's own page, with the date it was read.</p>
-<p class="muted">Version ${esc(data.meta.version)}. Last verified ${esc(data.meta.last_verified)}. ${data.exportable.length} exportable, ${data.streamed.length} streamed only, ${data.object_only.length} object-level names out of scope.</p>
+<p class="muted">Version ${esc(data.meta.version)}. Last verified ${esc(data.meta.last_verified)}. ${data.exportable.length} exportable, ${data.streamed.length} streamed only, ${data.hosted_wrappers.length} hosted wrappers, ${data.announced.length} announced, ${data.object_only.length} object-level names out of scope.</p>
 <p class="muted">${esc(data.meta.scope)}</p>
 </header>
+
+<h2 id="cite">Cite this</h2>
+<p class="cite">${esc(M.citation)}</p>
+<p class="muted">A <code>CITATION.cff</code> file is in the repository, so GitHub's "Cite this repository" gives the same string.</p>
+
+<h2 id="data">Use the data</h2>
+<ul>
+<li>JSON: <a href="${esc(M.json_url)}">${esc(M.json_url)}</a></li>
+<li>Schema: <a href="${esc(M.schema_url)}">${esc(M.schema_url)}</a></li>
+<li>Licence: data CC BY 4.0, code MIT. Version ${esc(M.version)}, last verified ${esc(M.last_verified)}.</li>
+</ul>
+<p class="muted">Shape, in three lines: <code>meta</code> carries the version, the dates and this citation string. <code>exportable</code> and <code>streamed</code> carry one object per tool, each with quoted <code>commercial_rights</code>, <code>restrictive_clauses</code>, <code>sources</code> and a <code>contact_route</code>. <code>changes</code>, <code>hosted_wrappers</code>, <code>announced</code> and <code>object_only</code> carry the change log, the resellers, the announced-but-unavailable and the out-of-scope names.</p>
+
+<h2 id="changes">What changed</h2>
+<p class="muted">The newest ${Math.min(NEWEST_N, changesNewestFirst.length)} of ${data.changes.length}. Every row carries the page it was read from and the date. Full history in <a href="https://github.com/rishsadh/world-model-registry/blob/main/CHANGELOG.md">CHANGELOG.md</a>, or subscribe to <a href="feed.xml">the Atom feed</a>.</p>
+<table class="changes">
+<thead><tr><th>Date</th><th>Entry</th><th>Field</th><th>Was</th><th>Now</th><th>Source</th><th>Read on</th></tr></thead>
+<tbody>
+${htmlChangeRows}
+</tbody>
+</table>
 
 <h2 id="exportable">Exportable</h2>
 <p class="muted">The tool hands you a file you can take away.</p>
@@ -326,6 +595,20 @@ ${data.exportable.map(htmlExportable).join('\n')}
 ${data.streamed.map(htmlStreamed).join('\n')}
 </table>
 
+<h2 id="hosted-wrappers">Hosted wrappers</h2>
+<p class="muted">A tool that resells another entry's model at its own price, in its own editor. The underlying terms still govern the output.</p>
+<table>
+<thead><tr><th>Tool</th><th>Underlying model</th><th>You get</th><th>Price</th><th>Last verified</th></tr></thead>
+${data.hosted_wrappers.map(htmlHosted).join('\n')}
+</table>
+
+<h2 id="announced">Announced, not available</h2>
+<p class="muted">Announced by its vendor but not released, so there is no file, price or licence to record. Listed so it is visible rather than missing.</p>
+<table>
+<thead><tr><th>Tool</th><th>Announced</th><th>Access</th><th>Why it is not listed above</th><th>Last verified</th></tr></thead>
+${data.announced.map(htmlAnnounced).join('\n')}
+</table>
+
 <h2 id="object-level">Object-level, out of scope</h2>
 <p class="muted">Single-object generators, a chair rather than a room. Listed so a reader knows they were considered. Not covered.</p>
 <ul>
@@ -333,16 +616,55 @@ ${data.object_only.map((e) => `<li>${esc(e.name)} (${esc(e.vendor)}): <a href="$
 </ul>
 
 <h2 id="correct">Correct an entry</h2>
-<p>Open a pull request against data/registry.json. Every change needs a source URL on the vendor's own domain and the date you read it. Quote clauses, do not paraphrase them.</p>
+<p>Open a pull request against data/registry.json. Every change needs a source URL on the vendor's own domain and the date you read it. Quote clauses, do not paraphrase them. A change to a value that is already recorded must also add an entry to the <code>changes</code> array, so the log stays complete.</p>
 
 <footer>
 <p>Data: CC BY 4.0. Code: MIT.</p>
 <p>${esc(CREDIT)}</p>
+<p>${esc(M.interested_party)}</p>
 </footer>
 </main>
 </body>
 </html>
 `;
-mkdirSync(join(root, 'dist'), { recursive: true });
-writeFileSync(join(root, 'dist/index.html'), html);
-console.log('Wrote README.md and dist/index.html');
+
+// ---------- Atom feed, one entry per distinct change date ----------
+
+const xesc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const feed = `<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>${xesc(NAME)}, what changed</title>
+<subtitle>${xesc(TAGLINE)}</subtitle>
+<link href="${xesc(M.canonical_url)}"/>
+<link rel="self" href="${xesc(M.canonical_url)}/feed.xml"/>
+<id>${xesc(M.canonical_url)}</id>
+<updated>${changeDates[0] || M.last_verified}T00:00:00Z</updated>
+<author><name>Rish Sadh</name><uri>https://rishsadh.com</uri></author>
+<rights>Data CC BY 4.0</rights>
+${changeDates.map((date) => {
+  const rows = changesNewestFirst.filter((c) => c.date === date);
+  const body = rows.map((c) => `${c.entry_id}, ${c.field}: "${c.was}" to "${c.now}". Source: ${c.source} (read ${c.read_on})`).join('\n');
+  return `<entry>
+<title>${xesc(`${rows.length} change${rows.length === 1 ? '' : 's'} on ${date}`)}</title>
+<link href="${xesc(M.canonical_url)}#changes"/>
+<id>${xesc(`${M.canonical_url}#changes-${date}`)}</id>
+<updated>${date}T00:00:00Z</updated>
+<summary type="text">${xesc(body)}</summary>
+</entry>`;
+}).join('\n')}
+</feed>
+`;
+
+// ---------- Write the site output ----------
+// docs/, not dist/: GitHub Pages serves a branch root or /docs and nothing else.
+const docs = join(root, 'docs');
+mkdirSync(docs, { recursive: true });
+writeFileSync(join(docs, 'index.html'), html);
+writeFileSync(join(docs, 'feed.xml'), feed);
+// Byte-identical copies, so the documented endpoint and the data file can never disagree.
+writeFileSync(join(docs, 'registry.json'), read('data/registry.json'));
+writeFileSync(join(docs, 'schema.json'), read('data/schema.json'));
+// Pages runs Jekyll by default, which would swallow files it does not understand.
+writeFileSync(join(docs, '.nojekyll'), '');
+
+console.log(`Wrote README.md, CHANGELOG.md (${data.changes.length} changes over ${changeDates.length} date(s)), CITATION.cff, docs/index.html, docs/feed.xml, docs/registry.json, docs/schema.json, docs/.nojekyll`);

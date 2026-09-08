@@ -1,0 +1,845 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "registry.schema.json",
+  "title": "World model output registry",
+  "description": "What each world model or scene generator hands you as a file, what it costs, and what you may do with it. Every value traces to a URL in sources fetched on last_verified.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "meta",
+    "changes",
+    "exportable",
+    "streamed",
+    "hosted_wrappers",
+    "announced",
+    "object_only"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "version",
+        "last_verified",
+        "scope",
+        "canonical_url",
+        "json_url",
+        "schema_url",
+        "citation",
+        "interested_party"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "last_verified": {
+          "$ref": "#/$defs/date"
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_url": {
+          "$ref": "#/$defs/url"
+        },
+        "json_url": {
+          "$ref": "#/$defs/url"
+        },
+        "schema_url": {
+          "$ref": "#/$defs/url"
+        },
+        "citation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interested_party": {
+          "type": "string",
+          "minLength": 1
+        },
+        "doi": {
+          "type": "string",
+          "pattern": "^10\\."
+        }
+      }
+    },
+    "exportable": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "$ref": "#/$defs/exportable"
+      }
+    },
+    "streamed": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "$ref": "#/$defs/streamed"
+      }
+    },
+    "object_only": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/object_only"
+      }
+    },
+    "changes": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/change"
+      }
+    },
+    "hosted_wrappers": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/hosted_wrapper"
+      }
+    },
+    "announced": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/announced"
+      }
+    }
+  },
+  "$defs": {
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "url": {
+      "type": "string",
+      "pattern": "^https?://"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "np": {
+      "type": "string",
+      "const": "not published"
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "#/$defs/url"
+      }
+    },
+    "quoted_clause": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "section",
+        "quote",
+        "url"
+      ],
+      "properties": {
+        "topic": {
+          "type": "string"
+        },
+        "section": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "$ref": "#/$defs/url"
+        }
+      }
+    },
+    "commercial_right": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tier",
+        "status"
+      ],
+      "properties": {
+        "tier": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "quoted",
+            "not published"
+          ]
+        },
+        "section": {
+          "type": "string"
+        },
+        "quote": {
+          "type": "string"
+        },
+        "url": {
+          "$ref": "#/$defs/url"
+        },
+        "conflict": {
+          "type": "boolean"
+        },
+        "conflict_section": {
+          "type": "string"
+        },
+        "conflict_quote": {
+          "type": "string"
+        },
+        "conflict_url": {
+          "$ref": "#/$defs/url"
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "limits",
+        "tier"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "text",
+            "single image",
+            "multiple images",
+            "video",
+            "panorama",
+            "other"
+          ]
+        },
+        "detail": {
+          "type": "string"
+        },
+        "limits": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tier": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "tier"
+      ],
+      "properties": {
+        "format": {
+          "type": "string",
+          "minLength": 1
+        },
+        "detail": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "tier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "price",
+        "currency",
+        "billing_period",
+        "includes",
+        "price_page_url"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "price": {
+          "type": "string",
+          "minLength": 1
+        },
+        "currency": {
+          "type": "string",
+          "minLength": 1
+        },
+        "billing_period": {
+          "type": "string",
+          "minLength": 1
+        },
+        "includes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "price_page_url": {
+          "$ref": "#/$defs/url"
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "you_get",
+        "price",
+        "rights",
+        "local"
+      ],
+      "properties": {
+        "you_get": {
+          "type": "string",
+          "minLength": 1
+        },
+        "price": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rights": {
+          "type": "string",
+          "minLength": 1
+        },
+        "local": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "exportable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "vendor",
+        "vendor_url",
+        "category",
+        "summary",
+        "inputs",
+        "outputs",
+        "tiers",
+        "licence",
+        "commercial_rights",
+        "restrictive_clauses",
+        "api",
+        "runs_locally",
+        "open_weights",
+        "last_verified",
+        "sources",
+        "notes",
+        "contact_route",
+        "first_listed"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/slug"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor_url": {
+          "$ref": "#/$defs/url"
+        },
+        "category": {
+          "const": "exportable"
+        },
+        "summary": {
+          "$ref": "#/$defs/summary"
+        },
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/input"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/output"
+          }
+        },
+        "tiers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/tier"
+          }
+        },
+        "licence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "url"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "url": {
+              "$ref": "#/$defs/url"
+            },
+            "dated": {
+              "type": "string"
+            }
+          }
+        },
+        "commercial_rights": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/commercial_right"
+          }
+        },
+        "restrictive_clauses": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/np"
+            },
+            {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/quoted_clause"
+              }
+            }
+          ]
+        },
+        "api": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "url",
+            "pricing"
+          ],
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "none",
+                "waitlist",
+                "public"
+              ]
+            },
+            "url": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/url"
+                },
+                {
+                  "$ref": "#/$defs/np"
+                }
+              ]
+            },
+            "pricing": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "runs_locally": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "value",
+            "vram",
+            "hardware"
+          ],
+          "properties": {
+            "value": {
+              "type": "boolean"
+            },
+            "vram": {
+              "type": "string",
+              "minLength": 1
+            },
+            "hardware": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "open_weights": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "value",
+            "licence"
+          ],
+          "properties": {
+            "value": {
+              "type": "boolean"
+            },
+            "licence": {
+              "type": "string",
+              "minLength": 1
+            },
+            "url": {
+              "$ref": "#/$defs/url"
+            }
+          }
+        },
+        "last_verified": {
+          "$ref": "#/$defs/date"
+        },
+        "sources": {
+          "$ref": "#/$defs/sources"
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contact_route": {
+          "$ref": "#/$defs/contact_route"
+        },
+        "first_listed": {
+          "$ref": "#/$defs/date"
+        },
+        "also_known_as": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "streamed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "vendor",
+        "vendor_url",
+        "category",
+        "what_it_shows",
+        "why_no_export",
+        "price",
+        "last_verified",
+        "sources",
+        "contact_route",
+        "first_listed"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/slug"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor_url": {
+          "$ref": "#/$defs/url"
+        },
+        "category": {
+          "const": "streamed"
+        },
+        "what_it_shows": {
+          "type": "string",
+          "minLength": 1
+        },
+        "why_no_export": {
+          "type": "string",
+          "minLength": 1
+        },
+        "price": {
+          "type": "string",
+          "minLength": 1
+        },
+        "terms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/quoted_clause"
+          }
+        },
+        "notes": {
+          "type": "string"
+        },
+        "last_verified": {
+          "$ref": "#/$defs/date"
+        },
+        "sources": {
+          "$ref": "#/$defs/sources"
+        },
+        "contact_route": {
+          "$ref": "#/$defs/contact_route"
+        },
+        "first_listed": {
+          "$ref": "#/$defs/date"
+        },
+        "also_known_as": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "object_only": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "vendor",
+        "vendor_url",
+        "category",
+        "last_verified"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/slug"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor_url": {
+          "$ref": "#/$defs/url"
+        },
+        "category": {
+          "const": "object_only"
+        },
+        "last_verified": {
+          "$ref": "#/$defs/date"
+        }
+      }
+    },
+    "contact_route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "value",
+        "url",
+        "read_on"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "email",
+            "issues",
+            "form",
+            "discord",
+            "not found"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/url"
+            },
+            {
+              "const": "not found"
+            }
+          ]
+        },
+        "read_on": {
+          "$ref": "#/$defs/date"
+        }
+      }
+    },
+    "change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date",
+        "entry_id",
+        "field",
+        "was",
+        "now",
+        "source",
+        "read_on"
+      ],
+      "properties": {
+        "date": {
+          "$ref": "#/$defs/date"
+        },
+        "entry_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "field": {
+          "type": "string",
+          "minLength": 1
+        },
+        "was": {
+          "type": "string",
+          "minLength": 1
+        },
+        "now": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "$ref": "#/$defs/url"
+        },
+        "read_on": {
+          "$ref": "#/$defs/date"
+        }
+      }
+    },
+    "hosted_wrapper": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "vendor",
+        "vendor_url",
+        "category",
+        "underlying_model",
+        "underlying_entry_id",
+        "you_get",
+        "price",
+        "last_verified",
+        "sources",
+        "notes"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/slug"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor_url": {
+          "$ref": "#/$defs/url"
+        },
+        "category": {
+          "const": "hosted_wrapper"
+        },
+        "underlying_model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "underlying_entry_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/slug"
+            },
+            {
+              "const": "not published"
+            }
+          ]
+        },
+        "you_get": {
+          "type": "string",
+          "minLength": 1
+        },
+        "price": {
+          "type": "string",
+          "minLength": 1
+        },
+        "last_verified": {
+          "$ref": "#/$defs/date"
+        },
+        "sources": {
+          "$ref": "#/$defs/sources"
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "announced": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "vendor",
+        "vendor_url",
+        "category",
+        "announced_on",
+        "access",
+        "why_not_listed",
+        "last_verified",
+        "sources"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/slug"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vendor_url": {
+          "$ref": "#/$defs/url"
+        },
+        "category": {
+          "const": "announced"
+        },
+        "announced_on": {
+          "$ref": "#/$defs/date"
+        },
+        "access": {
+          "type": "string",
+          "minLength": 1
+        },
+        "why_not_listed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "last_verified": {
+          "$ref": "#/$defs/date"
+        },
+        "sources": {
+          "$ref": "#/$defs/sources"
+        }
+      }
+    }
+  }
+}

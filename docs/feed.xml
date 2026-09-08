@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>World Model Registry, what changed</title>
+<subtitle>What you actually get as a file, what it costs, and what you are allowed to do with it.</subtitle>
+<link href="https://rishsadh.com/world-model-registry"/>
+<link rel="self" href="https://rishsadh.com/world-model-registry/feed.xml"/>
+<id>https://rishsadh.com/world-model-registry</id>
+<updated>2026-09-08T00:00:00Z</updated>
+<author><name>Rish Sadh</name><uri>https://rishsadh.com</uri></author>
+<rights>Data CC BY 4.0</rights>
+<entry>
+<title>7 changes on 2026-09-08</title>
+<link href="https://rishsadh.com/world-model-registry#changes"/>
+<id>https://rishsadh.com/world-model-registry#changes-2026-09-08</id>
+<updated>2026-09-08T00:00:00Z</updated>
+<summary type="text">hunyuanworld-mirror, licence.url: "https://github.com/Tencent-Hunyuan/HunyuanWorld-Mirror/blob/main/LICENSE" to "https://github.com/Tencent-Hunyuan/HunyuanWorld-Mirror/blob/main/License.txt". Source: https://github.com/Tencent-Hunyuan/HunyuanWorld-Mirror (read 2026-09-08)
+hy-world-1-5-worldplay, sources, licence file: "https://github.com/Tencent-Hunyuan/HY-WorldPlay/blob/main/LICENSE" to "https://github.com/Tencent-Hunyuan/HY-WorldPlay/blob/main/License.txt". Source: https://github.com/Tencent-Hunyuan/HY-WorldPlay (read 2026-09-08)
+worldsplat, licence.url: "https://github.com/timscheuerai/worldsplat/blob/main/LICENSE" to "https://github.com/timscheuerai/worldsplat/blob/master/LICENSE". Source: https://github.com/timscheuerai/worldsplat (read 2026-09-08)
+beeble-3d-scene-generator, listed: "not listed" to "listed". Source: https://www.beeble.ai/features/3d-scene-generator (read 2026-09-08)
+scenario-hy-world-multi-view-to-splat, listed: "not listed" to "listed". Source: https://www.scenario.com/models/hy-world-multi-view-to-splat (read 2026-09-08)
+worldlabs-atlas, listed: "not listed" to "listed". Source: https://www.worldlabs.ai/blog/atlas (read 2026-09-08)
+meta-worldgen, listed: "not listed" to "listed". Source: https://arxiv.org/abs/2511.16825 (read 2026-09-08)</summary>
+</entry>
+<entry>
+<title>16 changes on 2026-09-03</title>
+<link href="https://rishsadh.com/world-model-registry#changes"/>
+<id>https://rishsadh.com/world-model-registry#changes-2026-09-03</id>
+<updated>2026-09-03T00:00:00Z</updated>
+<summary type="text">marble, listed: "not listed" to "listed". Source: https://marble.worldlabs.ai/pricing (read 2026-09-03)
+hunyuanworld-1-0, listed: "not listed" to "listed". Source: https://github.com/Tencent-Hunyuan/HunyuanWorld-1.0 (read 2026-09-03)
+hunyuanworld-voyager, listed: "not listed" to "listed". Source: https://github.com/Tencent-Hunyuan/HunyuanWorld-Voyager (read 2026-09-03)
+hunyuanworld-mirror, listed: "not listed" to "listed". Source: https://github.com/Tencent-Hunyuan/HunyuanWorld-Mirror (read 2026-09-03)
+hy-world-2-0, listed: "not listed" to "listed". Source: https://github.com/Tencent-Hunyuan/HY-World-2.0 (read 2026-09-03)
+matrix-3d, listed: "not listed" to "listed". Source: https://github.com/SkyworkAI/Matrix-3D (read 2026-09-03)
+flashworld, listed: "not listed" to "listed". Source: https://github.com/imlixinyang/FlashWorld (read 2026-09-03)
+worldgen, listed: "not listed" to "listed". Source: https://github.com/ZiYang-xie/WorldGen (read 2026-09-03)
+worldsplat, listed: "not listed" to "listed". Source: https://github.com/timscheuerai/worldsplat (read 2026-09-03)
+odyssey, listed: "not listed" to "listed". Source: https://odyssey.ml/ (read 2026-09-03)
+decart-oasis-3, listed: "not listed" to "listed". Source: https://www.decart.ai/ (read 2026-09-03)
+project-genie, listed: "not listed" to "listed". Source: https://deepmind.google/models/genie/ (read 2026-09-03)
+runway-gwm-worlds, listed: "not listed" to "listed". Source: https://runway.com/research/introducing-runway-gwm-1 (read 2026-09-03)
+matrix-game-3, listed: "not listed" to "listed". Source: https://github.com/SkyworkAI/Matrix-Game (read 2026-09-03)
+hy-world-1-5-worldplay, listed: "not listed" to "listed". Source: https://github.com/Tencent-Hunyuan/HY-WorldPlay (read 2026-09-03)
+lingbot-world, listed: "not listed" to "listed". Source: https://github.com/Robbyant/lingbot-world (read 2026-09-03)</summary>
+</entry>
+</feed>

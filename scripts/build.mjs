@@ -279,6 +279,8 @@ const readme = fill(read('templates/README.template.md'), {
   SCOPE: data.meta.scope,
   TAGLINE,
   CITATION: data.meta.citation,
+  DOI: data.meta.doi,
+  LAST_VERIFIED_BADGE: String(data.meta.last_verified).replace(/-/g, '--'),
   INTERESTED_PARTY: data.meta.interested_party,
   CANONICAL_URL: data.meta.canonical_url,
   JSON_URL: data.meta.json_url,

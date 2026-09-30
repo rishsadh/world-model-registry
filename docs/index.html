@@ -80,10 +80,37 @@ footer p{margin:.25rem 0}
 <p class="muted">Shape, in three lines: <code>meta</code> carries the version, the dates and this citation string. <code>exportable</code> and <code>streamed</code> carry one object per tool, each with quoted <code>commercial_rights</code>, <code>restrictive_clauses</code>, <code>sources</code> and a <code>contact_route</code>. <code>changes</code>, <code>hosted_wrappers</code>, <code>announced</code> and <code>object_only</code> carry the change log, the resellers, the announced-but-unavailable and the out-of-scope names.</p>
 
 <h2 id="changes">What changed</h2>
-<p class="muted">The newest 10 of 47. Every row carries the page it was read from and the date. Full history in <a href="https://github.com/rishsadh/world-model-registry/blob/main/CHANGELOG.md">CHANGELOG.md</a>, or subscribe to <a href="feed.xml">the Atom feed</a>.</p>
+<p class="muted">The newest 10 of 50. Every row carries the page it was read from and the date. Full history in <a href="https://github.com/rishsadh/world-model-registry/blob/main/CHANGELOG.md">CHANGELOG.md</a>, or subscribe to <a href="feed.xml">the Atom feed</a>.</p>
 <table class="changes">
 <thead><tr><th>Date</th><th>Entry</th><th>Field</th><th>Was</th><th>Now</th><th>Source</th><th>Read on</th></tr></thead>
 <tbody>
+<tr>
+<td data-label="Date" class="ok">2026-09-30</td>
+<td data-label="Entry"><a href="#marble">marble</a></td>
+<td data-label="Field">sources, export page URL</td>
+<td data-label="Was">https://docs.worldlabs.ai/marble/export.md</td>
+<td data-label="Now">https://docs.worldlabs.ai/marble/export/gaussian-splat.md (the old URL now redirects here; same content)</td>
+<td data-label="Source"><a href="https://docs.worldlabs.ai/marble/export/gaussian-splat.md">source</a></td>
+<td data-label="Read on" class="ok">2026-09-30</td>
+</tr>
+<tr>
+<td data-label="Date" class="ok">2026-09-30</td>
+<td data-label="Entry"><a href="#beeble-3d-scene-generator">beeble-3d-scene-generator</a></td>
+<td data-label="Field">sources, pricing page URL</td>
+<td data-label="Was">https://www.beeble.ai/pricing</td>
+<td data-label="Now">https://beeble.ai/pricing-cloud (the old URL now redirects here; the listed prices and credits are unchanged)</td>
+<td data-label="Source"><a href="https://beeble.ai/pricing-cloud">source</a></td>
+<td data-label="Read on" class="ok">2026-09-30</td>
+</tr>
+<tr>
+<td data-label="Date" class="ok">2026-09-30</td>
+<td data-label="Entry"><a href="#runway-gwm-worlds">runway-gwm-worlds</a></td>
+<td data-label="Field">contact_route value</td>
+<td data-label="Was">Runway help centre ticket, from Getting Help with your Runway Account</td>
+<td data-label="Now">In-app help: an AI assistant that escalates to a person, per Getting Help with your Runway Account</td>
+<td data-label="Source"><a href="https://help.runwayml.com/hc/en-us/articles/20821762056723">source</a></td>
+<td data-label="Read on" class="ok">2026-09-30</td>
+</tr>
 <tr>
 <td data-label="Date" class="ok">2026-09-29</td>
 <td data-label="Entry"><a href="#marble">marble</a></td>
@@ -147,33 +174,6 @@ footer p{margin:.25rem 0}
 <td data-label="Source"><a href="https://3d.hunyuan.tencent.com/sceneTo3D">source</a></td>
 <td data-label="Read on" class="ok">2026-09-29</td>
 </tr>
-<tr>
-<td data-label="Date" class="ok">2026-09-29</td>
-<td data-label="Entry"><a href="#worldsplat">worldsplat</a></td>
-<td data-label="Field">tiers[0].includes[0], star count</td>
-<td data-label="Was">Repository created 27 March 2026, last pushed 28 March 2026, 2 stars (GitHub API)</td>
-<td data-label="Now">Repository created 27 March 2026, last pushed 28 March 2026, 3 stars (GitHub API, read 29 September 2026)</td>
-<td data-label="Source"><a href="https://api.github.com/repos/timscheuerai/worldsplat">source</a></td>
-<td data-label="Read on" class="ok">2026-09-29</td>
-</tr>
-<tr>
-<td data-label="Date" class="ok">2026-09-29</td>
-<td data-label="Entry"><a href="#scenario-hy-world-multi-view-to-splat">scenario-hy-world-multi-view-to-splat</a></td>
-<td data-label="Field">notes, region tag</td>
-<td data-label="Was">&quot;geoRestriction:EU/US/KR&quot;</td>
-<td data-label="Now">&quot;GeoRestriction:EU/UK/KR&quot;</td>
-<td data-label="Source"><a href="https://www.scenario.com/models/hy-world-multi-view-to-splat">source</a></td>
-<td data-label="Read on" class="ok">2026-09-29</td>
-</tr>
-<tr>
-<td data-label="Date" class="ok">2026-09-29</td>
-<td data-label="Entry"><a href="#odyssey">odyssey</a></td>
-<td data-label="Field">vendor_url, sources, quote and contact URLs</td>
-<td data-label="Was">https://odyssey.ml/</td>
-<td data-label="Now">https://odyssey.systems/ (odyssey.ml URLs return HTTP 308 to the same paths on odyssey.systems; experience.odyssey.ml and documentation.api.odyssey.ml unchanged)</td>
-<td data-label="Source"><a href="https://odyssey.systems/legal">source</a></td>
-<td data-label="Read on" class="ok">2026-09-29</td>
-</tr>
 </tbody>
 </table>
 
@@ -201,7 +201,7 @@ footer p{margin:.25rem 0}
 <h4>Runs locally</h4><p>No. VRAM: not applicable. Hardware: Hosted only. Exports render locally in Spark, Unreal, Unity, Blender or Houdini.</p>
 <h4>Open weights</h4><p>No. Licence: not applicable</p>
 <h4>Notes</h4><p>Models selectable on 29 September 2026: Marble 1.0 Draft, Marble 1.0, Marble 1.1, Marble 1.1 Plus; the docs recommend Marble 1.1. The release notes page still ends at 2 April 2026, with no published release note since, while World Labs launched Atlas on 1 September 2026 (early access with select partners; the post states it will power future versions of Marble). On 28 September 2026 AMD announced a definitive agreement to acquire World Labs, expected to close by the end of 2026 subject to regulatory approvals; on 29 September 2026 the Terms of Service (last updated January 21, 2026) and the pricing pages did not mention AMD.</p>
-<h4>Sources, fetched 2026-09-29</h4><ul><li><a href="https://marble.worldlabs.ai/pricing">https://marble.worldlabs.ai/pricing</a></li><li><a href="https://www.worldlabs.ai/terms-of-service">https://www.worldlabs.ai/terms-of-service</a></li><li><a href="https://docs.worldlabs.ai/marble/support/account-billing.md">https://docs.worldlabs.ai/marble/support/account-billing.md</a></li><li><a href="https://docs.worldlabs.ai/marble/export.md">https://docs.worldlabs.ai/marble/export.md</a></li><li><a href="https://docs.worldlabs.ai/marble/export/specs.md">https://docs.worldlabs.ai/marble/export/specs.md</a></li><li><a href="https://docs.worldlabs.ai/marble/export/mesh.md">https://docs.worldlabs.ai/marble/export/mesh.md</a></li><li><a href="https://docs.worldlabs.ai/marble/create/prompt-guides/index.md">https://docs.worldlabs.ai/marble/create/prompt-guides/index.md</a></li><li><a href="https://docs.worldlabs.ai/marble/create/prompt-guides/multi-image-prompt.md">https://docs.worldlabs.ai/marble/create/prompt-guides/multi-image-prompt.md</a></li><li><a href="https://docs.worldlabs.ai/marble/create/prompt-guides/pano-prompt.md">https://docs.worldlabs.ai/marble/create/prompt-guides/pano-prompt.md</a></li><li><a href="https://docs.worldlabs.ai/marble/create/prompt-guides/video-prompt.md">https://docs.worldlabs.ai/marble/create/prompt-guides/video-prompt.md</a></li><li><a href="https://docs.worldlabs.ai/marble/models.md">https://docs.worldlabs.ai/marble/models.md</a></li><li><a href="https://docs.worldlabs.ai/marble/release-notes.md">https://docs.worldlabs.ai/marble/release-notes.md</a></li><li><a href="https://docs.worldlabs.ai/api/pricing.md">https://docs.worldlabs.ai/api/pricing.md</a></li><li><a href="https://docs.worldlabs.ai/api/rate-limits.md">https://docs.worldlabs.ai/api/rate-limits.md</a></li><li><a href="https://docs.worldlabs.ai/api/faq.md">https://docs.worldlabs.ai/api/faq.md</a></li><li><a href="https://docs.worldlabs.ai/marble/support/faq.md">https://docs.worldlabs.ai/marble/support/faq.md</a></li><li><a href="https://www.worldlabs.ai/blog/atlas">https://www.worldlabs.ai/blog/atlas</a></li><li><a href="https://www.worldlabs.ai/blog/amd-announcement">https://www.worldlabs.ai/blog/amd-announcement</a></li><li><a href="https://ir.amd.com/news-events/press-releases/detail/1299/amd-to-acquire-world-labs-to-advance-the-future-of-ai-compute">https://ir.amd.com/news-events/press-releases/detail/1299/amd-to-acquire-world-labs-to-advance-the-future-of-ai-compute</a></li></ul>
+<h4>Sources, fetched 2026-09-29</h4><ul><li><a href="https://marble.worldlabs.ai/pricing">https://marble.worldlabs.ai/pricing</a></li><li><a href="https://www.worldlabs.ai/terms-of-service">https://www.worldlabs.ai/terms-of-service</a></li><li><a href="https://docs.worldlabs.ai/marble/support/account-billing.md">https://docs.worldlabs.ai/marble/support/account-billing.md</a></li><li><a href="https://docs.worldlabs.ai/marble/export/gaussian-splat.md">https://docs.worldlabs.ai/marble/export/gaussian-splat.md</a></li><li><a href="https://docs.worldlabs.ai/marble/export/specs.md">https://docs.worldlabs.ai/marble/export/specs.md</a></li><li><a href="https://docs.worldlabs.ai/marble/export/mesh.md">https://docs.worldlabs.ai/marble/export/mesh.md</a></li><li><a href="https://docs.worldlabs.ai/marble/create/prompt-guides/index.md">https://docs.worldlabs.ai/marble/create/prompt-guides/index.md</a></li><li><a href="https://docs.worldlabs.ai/marble/create/prompt-guides/multi-image-prompt.md">https://docs.worldlabs.ai/marble/create/prompt-guides/multi-image-prompt.md</a></li><li><a href="https://docs.worldlabs.ai/marble/create/prompt-guides/pano-prompt.md">https://docs.worldlabs.ai/marble/create/prompt-guides/pano-prompt.md</a></li><li><a href="https://docs.worldlabs.ai/marble/create/prompt-guides/video-prompt.md">https://docs.worldlabs.ai/marble/create/prompt-guides/video-prompt.md</a></li><li><a href="https://docs.worldlabs.ai/marble/models.md">https://docs.worldlabs.ai/marble/models.md</a></li><li><a href="https://docs.worldlabs.ai/marble/release-notes.md">https://docs.worldlabs.ai/marble/release-notes.md</a></li><li><a href="https://docs.worldlabs.ai/api/pricing.md">https://docs.worldlabs.ai/api/pricing.md</a></li><li><a href="https://docs.worldlabs.ai/api/rate-limits.md">https://docs.worldlabs.ai/api/rate-limits.md</a></li><li><a href="https://docs.worldlabs.ai/api/faq.md">https://docs.worldlabs.ai/api/faq.md</a></li><li><a href="https://docs.worldlabs.ai/marble/support/faq.md">https://docs.worldlabs.ai/marble/support/faq.md</a></li><li><a href="https://www.worldlabs.ai/blog/atlas">https://www.worldlabs.ai/blog/atlas</a></li><li><a href="https://www.worldlabs.ai/blog/amd-announcement">https://www.worldlabs.ai/blog/amd-announcement</a></li><li><a href="https://ir.amd.com/news-events/press-releases/detail/1299/amd-to-acquire-world-labs-to-advance-the-future-of-ai-compute">https://ir.amd.com/news-events/press-releases/detail/1299/amd-to-acquire-world-labs-to-advance-the-future-of-ai-compute</a></li></ul>
 </div></details></td></tr>
 </tbody>
 <tbody class="entry" id="hunyuanworld-1-0">
@@ -502,7 +502,7 @@ footer p{margin:.25rem 0}
 <tr class="detail"><td colspan="5"><details><summary>Notes and sources</summary><div class="panel">
 <h4>Registry entry for the underlying model</h4><p><a href="#marble">marble</a></p>
 <h4>Notes</h4><p>Beeble resells Marble generation inside its own editor and its own credit system, so the price per scene is Beeble's, not World Labs'. The Creator plan line reads &quot;Full commercial license&quot;; the underlying World Labs terms still govern the output. Inputs accepted are text, image, video up to 30 seconds, or a 2:1 panorama.</p>
-<h4>Sources, fetched 2026-09-29</h4><ul><li><a href="https://www.beeble.ai/features/3d-scene-generator">https://www.beeble.ai/features/3d-scene-generator</a></li><li><a href="https://www.beeble.ai/pricing">https://www.beeble.ai/pricing</a></li></ul>
+<h4>Sources, fetched 2026-09-29</h4><ul><li><a href="https://www.beeble.ai/features/3d-scene-generator">https://www.beeble.ai/features/3d-scene-generator</a></li><li><a href="https://beeble.ai/pricing-cloud">https://beeble.ai/pricing-cloud</a></li></ul>
 </div></details></td></tr>
 </tbody>
 <tbody class="entry" id="scenario-hy-world-multi-view-to-splat">

@@ -47,10 +47,13 @@ Every entry keeps a stable anchor. `#marble` on the page and in this file point 
 
 ## What changed
 
-The newest ten of 47. Every row carries the page it was read from and the date it was read. Full history in [CHANGELOG.md](CHANGELOG.md); an Atom feed is generated at `docs/feed.xml`.
+The newest ten of 50. Every row carries the page it was read from and the date it was read. Full history in [CHANGELOG.md](CHANGELOG.md); an Atom feed is generated at `docs/feed.xml`.
 
 | Date | Entry | Field | Was | Now | Source | Read on |
 |---|---|---|---|---|---|---|
+| 2026-09-30 | marble | sources, export page URL | https://docs.worldlabs.ai/marble/export.md | https://docs.worldlabs.ai/marble/export/gaussian-splat.md (the old URL now redirects here; same content) | [source](https://docs.worldlabs.ai/marble/export/gaussian-splat.md) | 2026-09-30 |
+| 2026-09-30 | beeble-3d-scene-generator | sources, pricing page URL | https://www.beeble.ai/pricing | https://beeble.ai/pricing-cloud (the old URL now redirects here; the listed prices and credits are unchanged) | [source](https://beeble.ai/pricing-cloud) | 2026-09-30 |
+| 2026-09-30 | runway-gwm-worlds | contact_route value | Runway help centre ticket, from Getting Help with your Runway Account | In-app help: an AI assistant that escalates to a person, per Getting Help with your Runway Account | [source](https://help.runwayml.com/hc/en-us/articles/20821762056723) | 2026-09-30 |
 | 2026-09-29 | marble | commercial_rights (Standard), quote, opening clause of 3.3(b) | Paid Account Users own all rights, title, and interest in and to Outputs generated through their use of the Services, ex ... | Subject to the terms, conditions, and limitations of this TOS, Paid Account Users own all rights, title, and interest in and to Outputs generated through their use of the Services, ex ... | [source](https://www.worldlabs.ai/terms-of-service) | 2026-09-29 |
 | 2026-09-29 | marble | commercial_rights (Pro and Max), quote, opening clause of 3.3(b) | Paid Account Users own all rights, title, and interest in and to Outputs generated through their use of the Services, ex ... | Subject to the terms, conditions, and limitations of this TOS, Paid Account Users own all rights, title, and interest in and to Outputs generated through their use of the Services, ex ... | [source](https://www.worldlabs.ai/terms-of-service) | 2026-09-29 |
 | 2026-09-29 | marble | notes, release cadence and ownership | Models selectable on 8 September 2026: Marble 1.0 Draft, Marble 1.0, Marble 1.1, Marble 1.1 Plus; the docs recommend Marble 1.1. The release notes page still ends at 2 April 2026, five months with no published release note, while World Labs launched Atlas on 1 September 2026. Atlas is early access with select partners and World Labs states it will power future versions of Marble. | Models selectable on 29 September 2026: Marble 1.0 Draft, Marble 1.0, Marble 1.1, Marble 1.1 Plus; the docs recommend Marble 1.1. The release notes page still ends at 2 April 2026, with no published release note since, while World Labs launched Atlas on 1 September 2026 (early access with select partners; the post states it will power future versions of Marble). On 28 September 2026 AMD announced a definitive agreement to acquire World Labs, expected to close by the end of 2026 subject to regulatory approvals; on 29 September 2026 the Terms of Service (last updated January 21, 2026) and the pricing pages did not mention AMD. | [source](https://docs.worldlabs.ai/marble/release-notes.md) | 2026-09-29 |
@@ -58,9 +61,6 @@ The newest ten of 47. Every row carries the page it was read from and the date i
 | 2026-09-29 | hunyuanworld-1-0 | tiers[1].includes[0], hosted demo page state | Page returned no readable content to the fetcher and showed only a loading spinner in a browser on 3 September 2026 | Page returned no readable content to the fetcher and showed only a loading spinner in a browser on 3 September 2026; on 29 September 2026 the page redirected to a login page with the text "登录后开启3D创作之旅" and showed no price or plan | [source](https://3d.hunyuan.tencent.com/sceneTo3D) | 2026-09-29 |
 | 2026-09-29 | hy-world-2-0 | tiers[1].includes[2], hosted product page state | Page showed only a loading spinner in a browser on 3 September 2026 | Page showed only a loading spinner in a browser on 3 September 2026; on 29 September 2026 the page redirected to a login page with the text "登录后开启3D创作之旅" and showed no price or plan | [source](https://3d.hunyuan.tencent.com/sceneTo3D) | 2026-09-29 |
 | 2026-09-29 | hy-world-1-5-worldplay | price, hosted demo page state | the page showed only a loading spinner on 3 September 2026. | the page showed only a loading spinner on 3 September 2026 and on 29 September 2026 redirected to a login page with no price shown. | [source](https://3d.hunyuan.tencent.com/sceneTo3D) | 2026-09-29 |
-| 2026-09-29 | worldsplat | tiers[0].includes[0], star count | Repository created 27 March 2026, last pushed 28 March 2026, 2 stars (GitHub API) | Repository created 27 March 2026, last pushed 28 March 2026, 3 stars (GitHub API, read 29 September 2026) | [source](https://api.github.com/repos/timscheuerai/worldsplat) | 2026-09-29 |
-| 2026-09-29 | scenario-hy-world-multi-view-to-splat | notes, region tag | "geoRestriction:EU/US/KR" | "GeoRestriction:EU/UK/KR" | [source](https://www.scenario.com/models/hy-world-multi-view-to-splat) | 2026-09-29 |
-| 2026-09-29 | odyssey | vendor_url, sources, quote and contact URLs | https://odyssey.ml/ | https://odyssey.systems/ (odyssey.ml URLs return HTTP 308 to the same paths on odyssey.systems; experience.odyssey.ml and documentation.api.odyssey.ml unchanged) | [source](https://odyssey.systems/legal) | 2026-09-29 |
 
 ## Exportable
 
@@ -206,7 +206,7 @@ Vendor: [World Labs](https://www.worldlabs.ai/). Last verified 2026-09-29.
 - https://marble.worldlabs.ai/pricing
 - https://www.worldlabs.ai/terms-of-service
 - https://docs.worldlabs.ai/marble/support/account-billing.md
-- https://docs.worldlabs.ai/marble/export.md
+- https://docs.worldlabs.ai/marble/export/gaussian-splat.md
 - https://docs.worldlabs.ai/marble/export/specs.md
 - https://docs.worldlabs.ai/marble/export/mesh.md
 - https://docs.worldlabs.ai/marble/create/prompt-guides/index.md
@@ -838,7 +838,7 @@ Vendor: [Beeble](https://www.beeble.ai/). Last verified 2026-09-29.
 **Sources**
 
 - https://www.beeble.ai/features/3d-scene-generator
-- https://www.beeble.ai/pricing
+- https://beeble.ai/pricing-cloud
 
 ### HY World - Multi-view to Splat
 

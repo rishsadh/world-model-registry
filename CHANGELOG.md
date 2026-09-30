@@ -4,6 +4,12 @@ Generated from the `changes` array in `data/registry.json` by `scripts/build.mjs
 
 Every line carries the source the change was read from and the date it was read. A change with no source is not recorded.
 
+## 2026-09-30
+
+- **marble**, sources, export page URL: "https://docs.worldlabs.ai/marble/export.md" to "https://docs.worldlabs.ai/marble/export/gaussian-splat.md (the old URL now redirects here; same content)". Source: https://docs.worldlabs.ai/marble/export/gaussian-splat.md (read 2026-09-30)
+- **beeble-3d-scene-generator**, sources, pricing page URL: "https://www.beeble.ai/pricing" to "https://beeble.ai/pricing-cloud (the old URL now redirects here; the listed prices and credits are unchanged)". Source: https://beeble.ai/pricing-cloud (read 2026-09-30)
+- **runway-gwm-worlds**, contact_route value: "Runway help centre ticket, from Getting Help with your Runway Account" to "In-app help: an AI assistant that escalates to a person, per Getting Help with your Runway Account". Source: https://help.runwayml.com/hc/en-us/articles/20821762056723 (read 2026-09-30)
+
 ## 2026-09-29
 
 - **marble**, commercial_rights (Standard), quote, opening clause of 3.3(b): "Paid Account Users own all rights, title, and interest in and to Outputs generated through their use of the Services, ex ..." to "Subject to the terms, conditions, and limitations of this TOS, Paid Account Users own all rights, title, and interest in and to Outputs generated through their use of the Services, ex ...". Source: https://www.worldlabs.ai/terms-of-service (read 2026-09-29)

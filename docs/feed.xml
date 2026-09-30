@@ -5,9 +5,18 @@
 <link href="https://rishsadh.com/world-model-registry"/>
 <link rel="self" href="https://rishsadh.com/world-model-registry/feed.xml"/>
 <id>https://rishsadh.com/world-model-registry</id>
-<updated>2026-09-29T00:00:00Z</updated>
+<updated>2026-09-30T00:00:00Z</updated>
 <author><name>Rish Sadh</name><uri>https://rishsadh.com</uri></author>
 <rights>Data CC BY 4.0</rights>
+<entry>
+<title>3 changes on 2026-09-30</title>
+<link href="https://rishsadh.com/world-model-registry#changes"/>
+<id>https://rishsadh.com/world-model-registry#changes-2026-09-30</id>
+<updated>2026-09-30T00:00:00Z</updated>
+<summary type="text">marble, sources, export page URL: "https://docs.worldlabs.ai/marble/export.md" to "https://docs.worldlabs.ai/marble/export/gaussian-splat.md (the old URL now redirects here; same content)". Source: https://docs.worldlabs.ai/marble/export/gaussian-splat.md (read 2026-09-30)
+beeble-3d-scene-generator, sources, pricing page URL: "https://www.beeble.ai/pricing" to "https://beeble.ai/pricing-cloud (the old URL now redirects here; the listed prices and credits are unchanged)". Source: https://beeble.ai/pricing-cloud (read 2026-09-30)
+runway-gwm-worlds, contact_route value: "Runway help centre ticket, from Getting Help with your Runway Account" to "In-app help: an AI assistant that escalates to a person, per Getting Help with your Runway Account". Source: https://help.runwayml.com/hc/en-us/articles/20821762056723 (read 2026-09-30)</summary>
+</entry>
 <entry>
 <title>22 changes on 2026-09-29</title>
 <link href="https://rishsadh.com/world-model-registry#changes"/>

@@ -13,6 +13,33 @@
   },
   "changes": [
     {
+      "date": "2026-09-30",
+      "entry_id": "marble",
+      "field": "sources, export page URL",
+      "was": "https://docs.worldlabs.ai/marble/export.md",
+      "now": "https://docs.worldlabs.ai/marble/export/gaussian-splat.md (the old URL now redirects here; same content)",
+      "source": "https://docs.worldlabs.ai/marble/export/gaussian-splat.md",
+      "read_on": "2026-09-30"
+    },
+    {
+      "date": "2026-09-30",
+      "entry_id": "beeble-3d-scene-generator",
+      "field": "sources, pricing page URL",
+      "was": "https://www.beeble.ai/pricing",
+      "now": "https://beeble.ai/pricing-cloud (the old URL now redirects here; the listed prices and credits are unchanged)",
+      "source": "https://beeble.ai/pricing-cloud",
+      "read_on": "2026-09-30"
+    },
+    {
+      "date": "2026-09-30",
+      "entry_id": "runway-gwm-worlds",
+      "field": "contact_route value",
+      "was": "Runway help centre ticket, from Getting Help with your Runway Account",
+      "now": "In-app help: an AI assistant that escalates to a person, per Getting Help with your Runway Account",
+      "source": "https://help.runwayml.com/hc/en-us/articles/20821762056723",
+      "read_on": "2026-09-30"
+    },
+    {
       "date": "2026-09-29",
       "entry_id": "marble",
       "field": "commercial_rights (Standard), quote, opening clause of 3.3(b)",
@@ -722,7 +749,7 @@
         "https://marble.worldlabs.ai/pricing",
         "https://www.worldlabs.ai/terms-of-service",
         "https://docs.worldlabs.ai/marble/support/account-billing.md",
-        "https://docs.worldlabs.ai/marble/export.md",
+        "https://docs.worldlabs.ai/marble/export/gaussian-splat.md",
         "https://docs.worldlabs.ai/marble/export/specs.md",
         "https://docs.worldlabs.ai/marble/export/mesh.md",
         "https://docs.worldlabs.ai/marble/create/prompt-guides/index.md",
@@ -1985,9 +2012,9 @@
       ],
       "contact_route": {
         "type": "form",
-        "value": "Runway help centre ticket, from Getting Help with your Runway Account",
+        "value": "In-app help: an AI assistant that escalates to a person, per Getting Help with your Runway Account",
         "url": "https://help.runwayml.com/hc/en-us/articles/20821762056723",
-        "read_on": "2026-09-08"
+        "read_on": "2026-09-30"
       },
       "first_listed": "2026-09-03"
     },
@@ -2084,7 +2111,7 @@
       "last_verified": "2026-09-29",
       "sources": [
         "https://www.beeble.ai/features/3d-scene-generator",
-        "https://www.beeble.ai/pricing"
+        "https://beeble.ai/pricing-cloud"
       ],
       "notes": "Beeble resells Marble generation inside its own editor and its own credit system, so the price per scene is Beeble's, not World Labs'. The Creator plan line reads \"Full commercial license\"; the underlying World Labs terms still govern the output. Inputs accepted are text, image, video up to 30 seconds, or a 2:1 panorama."
     },

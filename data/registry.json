@@ -2,16 +2,70 @@
   "meta": {
     "title": "World Model Registry",
     "version": "2",
-    "last_verified": "2026-09-29",
+    "last_verified": "2026-10-20",
     "scope": "Tools that generate a navigable scene or world from text, images or video. Exportable: the tool hands you a file. Streamed only: the tool shows you a world and gives you no file. Object-level generators are listed by name and not covered.",
     "canonical_url": "https://rishsadh.com/world-model-registry",
     "json_url": "https://rishsadh.com/world-model-registry/registry.json",
     "schema_url": "https://rishsadh.com/world-model-registry/schema.json",
-    "citation": "Rish Sadh, \"World Model Registry\", version 2, 2026-09-29. https://rishsadh.com/world-model-registry. DOI 10.5281/zenodo.22653071. Data CC BY 4.0.",
+    "citation": "Rish Sadh, \"World Model Registry\", version 2, 2026-10-20. https://rishsadh.com/world-model-registry. DOI 10.5281/zenodo.22653071. Data CC BY 4.0.",
     "interested_party": "This registry is maintained by Rish Sadh, founder of Reidify, a design studio in Mumbai. It takes no money from any vendor listed, publishes no scores or rankings, and records only what vendors publish, quoted with dates.",
     "doi": "10.5281/zenodo.22653071"
   },
   "changes": [
+    {
+      "date": "2026-10-20",
+      "entry_id": "marble",
+      "field": "tiers[0].includes, Expand worlds to larger spaces",
+      "was": "Expand worlds to larger spaces",
+      "now": "Expand worlds to larger spaces (conflict: the pricing page lists this under Free, in the plan card and with a check in the Free column of its comparison table, read 2026-10-20; the billing docs list \"Expanding worlds to larger spaces\" under \"Pro plan\", \"Unlocks advanced workflows, including:\")",
+      "source": "https://docs.worldlabs.ai/marble/support/account-billing.md",
+      "read_on": "2026-10-20"
+    },
+    {
+      "date": "2026-10-20",
+      "entry_id": "worldsplat",
+      "field": "tiers[0].includes[0], star count",
+      "was": "Repository created 27 March 2026, last pushed 28 March 2026, 3 stars (GitHub API, read 29 September 2026)",
+      "now": "Repository created 27 March 2026, last pushed 28 March 2026, 4 stars (GitHub API, read 20 October 2026)",
+      "source": "https://api.github.com/repos/timscheuerai/worldsplat",
+      "read_on": "2026-10-20"
+    },
+    {
+      "date": "2026-10-20",
+      "entry_id": "decart-oasis-3",
+      "field": "notes, Mirage page",
+      "was": "The Mirage page at decart.ai/mirage returned HTTP 404 on 3 September 2026; the homepage lists",
+      "now": "The Mirage page at decart.ai/mirage returned HTTP 404 on 3 September 2026 and again on 20 October 2026, with and without www, and no replacement was found (the decart.ai homepage links to no Mirage page, the pages /lucy, /oasis and /blog and research.decart.ai do not mention it, and the Wayback Machine availability API returned no snapshot of the address on 20 October 2026); the homepage lists",
+      "source": "https://decart.ai/",
+      "read_on": "2026-10-20"
+    },
+    {
+      "date": "2026-10-20",
+      "entry_id": "decart-oasis-3",
+      "field": "sources, Mirage page URL",
+      "was": "https://www.decart.ai/mirage",
+      "now": "removed: the address returns HTTP 404 and no replacement page exists; the 404 is recorded in notes",
+      "source": "https://www.decart.ai/mirage",
+      "read_on": "2026-10-20"
+    },
+    {
+      "date": "2026-10-20",
+      "entry_id": "lingbot-world",
+      "field": "why_no_export, GPU count",
+      "was": "generate.py writes video; the examples run on eight GPUs. No 3D scene representation is produced.",
+      "now": "generate.py writes video; the 14B examples run on eight GPUs and the 1.3B example on four. No 3D scene representation is produced.",
+      "source": "https://github.com/Robbyant/lingbot-world-v2",
+      "read_on": "2026-10-20"
+    },
+    {
+      "date": "2026-10-20",
+      "entry_id": "marble",
+      "field": "outputs, High-quality mesh GLB, detail",
+      "was": "One glb around 600k triangles with texture information; another glb around 1M triangles with vertex colors. Takes up to an hour to generate. Rate limited to 4 generation requests per hour per user. Typically 100-200 MB",
+      "now": "One glb around 600k triangles with texture information; another glb around 1M triangles with vertex colors. Takes up to an hour to generate. Rate limited to 4 generation requests per hour per user. Typically 100-200 MB. The export specs page states \"You can only generate high quality mesh on worlds you own\"",
+      "source": "https://docs.worldlabs.ai/marble/export/specs.md",
+      "read_on": "2026-10-20"
+    },
     {
       "date": "2026-09-30",
       "entry_id": "marble",
@@ -533,7 +587,7 @@
         },
         {
           "format": "High-quality mesh, GLB",
-          "detail": "One glb around 600k triangles with texture information; another glb around 1M triangles with vertex colors. Takes up to an hour to generate. Rate limited to 4 generation requests per hour per user. Typically 100-200 MB",
+          "detail": "One glb around 600k triangles with texture information; another glb around 1M triangles with vertex colors. Takes up to an hour to generate. Rate limited to 4 generation requests per hour per user. Typically 100-200 MB. The export specs page states \"You can only generate high quality mesh on worlds you own\"",
           "tier": "Pro and above. API: 3,500 credits ($2.80) per world"
         },
         {
@@ -557,7 +611,7 @@
             "360 panorama input",
             "Advanced create flow with editing",
             "\"Chisel\" mode for 3D layout control",
-            "Expand worlds to larger spaces"
+            "Expand worlds to larger spaces (conflict: the pricing page lists this under Free, in the plan card and with a check in the Free column of its comparison table, read 2026-10-20; the billing docs list \"Expanding worlds to larger spaces\" under \"Pro plan\", \"Unlocks advanced workflows, including:\")"
           ],
           "price_page_url": "https://marble.worldlabs.ai/pricing"
         },
@@ -744,7 +798,7 @@
         "value": false,
         "licence": "not applicable"
       },
-      "last_verified": "2026-09-29",
+      "last_verified": "2026-10-20",
       "sources": [
         "https://marble.worldlabs.ai/pricing",
         "https://www.worldlabs.ai/terms-of-service",
@@ -1743,7 +1797,7 @@
           "currency": "USD",
           "billing_period": "not applicable",
           "includes": [
-            "Repository created 27 March 2026, last pushed 28 March 2026, 3 stars (GitHub API, read 29 September 2026)",
+            "Repository created 27 March 2026, last pushed 28 March 2026, 4 stars (GitHub API, read 20 October 2026)",
             "Compute is the user's own cost"
           ],
           "price_page_url": "https://github.com/timscheuerai/worldsplat"
@@ -1789,7 +1843,7 @@
         "licence": "No weights of its own; uses Wan 2.2 TI2V-5B (Apache-2.0 repository), MASt3R (CC BY-NC-SA 4.0) and gsplat",
         "url": "https://github.com/timscheuerai/worldsplat"
       },
-      "last_verified": "2026-09-29",
+      "last_verified": "2026-10-20",
       "sources": [
         "https://github.com/timscheuerai/worldsplat",
         "https://github.com/naver/mast3r/blob/main/LICENSE",
@@ -1912,8 +1966,8 @@
           "url": "https://docs.platform.decart.ai/resources/api-terms.md"
         }
       ],
-      "notes": "No benchmarking or competitive-analysis clause was found in either Decart document. The Mirage page at decart.ai/mirage returned HTTP 404 on 3 September 2026; the homepage lists Lucy 2.5 as a video editing model and Oasis 3 as the world model. Access is by API key from platform.decart.ai.",
-      "last_verified": "2026-09-29",
+      "notes": "No benchmarking or competitive-analysis clause was found in either Decart document. The Mirage page at decart.ai/mirage returned HTTP 404 on 3 September 2026 and again on 20 October 2026, with and without www, and no replacement was found (the decart.ai homepage links to no Mirage page, the pages /lucy, /oasis and /blog and research.decart.ai do not mention it, and the Wayback Machine availability API returned no snapshot of the address on 20 October 2026); the homepage lists Lucy 2.5 as a video editing model and Oasis 3 as the world model. Access is by API key from platform.decart.ai.",
+      "last_verified": "2026-10-20",
       "sources": [
         "https://www.decart.ai/",
         "https://www.decart.ai/oasis",
@@ -1922,7 +1976,6 @@
         "https://docs.platform.decart.ai/resources/faq.md",
         "https://decart.ai/terms",
         "https://docs.platform.decart.ai/resources/api-terms.md",
-        "https://www.decart.ai/mirage",
         "https://www.decart.ai/lucy"
       ],
       "contact_route": {
@@ -2076,10 +2129,10 @@
       "vendor_url": "https://technology.robbyant.com/lingbot-world-v2",
       "category": "streamed",
       "what_it_shows": "Open-weights interactive world simulator from an image, a text prompt and optional camera or action signals. Version 1 (29 January 2026): 480P and 720P, 16 frames per second, under 1 second latency. Version 2 (9 July 2026): 720p video streams at 60 fps with the distilled real-time variant, 14B causal-fast model. The version 2 README News dated Sep. 10, 2026 lists the remaining variants: 14B causal-pretrained, 14B bidirectional and 1.3B causal-fast. Hosted real-time demos through third parties Reactor (web, per the README; the project page says PC) and LingGuang (mobile).",
-      "why_no_export": "generate.py writes video; the examples run on eight GPUs. No 3D scene representation is produced.",
+      "why_no_export": "generate.py writes video; the 14B examples run on eight GPUs and the 1.3B example on four. No 3D scene representation is produced.",
       "price": "Free download. Version 1 repository is Apache-2.0 and marked no longer actively maintained. Version 2 README: licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0), available for non-commercial use only. Reactor and LingGuang prices not published.",
       "notes": "The version 1 README says the codebase is built on Wan2.2. Skywork's Matrix-Game 3.0 README credits lingbot-world for its context parallel framework. The version 2 README gives 480P on 8 GPUs for the 14B causal_fast model and 480P on 4 GPUs for the 1.3B causal_fast model, and states \"We do NOT plan to release our deployment code.\"",
-      "last_verified": "2026-09-29",
+      "last_verified": "2026-10-20",
       "sources": [
         "https://github.com/Robbyant/lingbot-world",
         "https://github.com/Robbyant/lingbot-world-v2",
@@ -2192,7 +2245,7 @@
       "announced_on": "2025-11-20",
       "access": "Paper only. arXiv records \"[Submitted on 20 Nov 2025]\" and lists no code, weights, demo or product page. Meta's blog post dated 21 Nov 2025 says \"While this work is still in the research phase and not available to developers\".",
       "why_not_listed": "Nothing is released to use, so there is no file, price or licence to record. Title: \"WorldGen: From Text to Traversable and Interactive 3D Worlds\".",
-      "last_verified": "2026-09-29",
+      "last_verified": "2026-10-20",
       "sources": [
         "https://arxiv.org/abs/2511.16825",
         "https://github.com/ZiYang-xie/WorldGen",
@@ -2208,7 +2261,7 @@
       "announced_on": "2026-08-07",
       "access": "Paper and project page only. The repository README news line reads \"2026.08.07: Paper and project page are released!\" and the repository holds a README and images, with no code, weights or licence file at the time of reading.",
       "why_not_listed": "Nothing is released to use, so there is no file, price or licence to record. Project page: \"an agentic framework that turns one open-ended prompt into an explicit, explorable, and editable open-world 3D scene.\" README title: \"WorldClaw: Agentic 3D Open-world Generation at Scale\".",
-      "last_verified": "2026-09-29",
+      "last_verified": "2026-10-20",
       "sources": [
         "https://github.com/Tencent-Hunyuan/Hunyuan3D-WorldClaw",
         "https://tencent-hunyuan.github.io/Hunyuan3D-WorldClaw/",

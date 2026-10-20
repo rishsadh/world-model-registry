@@ -3,7 +3,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22653071.svg)](https://doi.org/10.5281/zenodo.22653071)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Code: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
-[![Last verified](https://img.shields.io/badge/last%20verified-2026--09--29-brightgreen.svg)](CHANGELOG.md)
+[![Last verified](https://img.shields.io/badge/last%20verified-2026--10--20-brightgreen.svg)](CHANGELOG.md)
 
 What you actually get as a file, what it costs, and what you are allowed to do with it.
 
@@ -15,7 +15,7 @@ Generated from `data/registry.json` by `scripts/build.mjs`. Do not edit this fil
 
 For every world model or scene generator, this registry records what you actually get as a file, what it costs, and what you are allowed to do with it. Every figure, price and clause is quoted from the vendor's own live page, with the date it was read. Where a vendor publishes nothing, the entry says "not published" rather than guessing.
 
-Version 2. Last verified 2026-09-29. 9 exportable entries, 7 streamed-only entries, 4 hosted wrappers, 3 announced but not available, 5 object-level names out of scope.
+Version 2. Last verified 2026-10-20. 9 exportable entries, 7 streamed-only entries, 4 hosted wrappers, 3 announced but not available, 5 object-level names out of scope.
 
 Scope: Tools that generate a navigable scene or world from text, images or video. Exportable: the tool hands you a file. Streamed only: the tool shows you a world and gives you no file. Object-level generators are listed by name and not covered.
 
@@ -24,7 +24,7 @@ This registry is maintained by Rish Sadh, founder of Reidify, a design studio in
 ## Cite this
 
 ```
-Rish Sadh, "World Model Registry", version 2, 2026-09-29. https://rishsadh.com/world-model-registry. DOI 10.5281/zenodo.22653071. Data CC BY 4.0.
+Rish Sadh, "World Model Registry", version 2, 2026-10-20. https://rishsadh.com/world-model-registry. DOI 10.5281/zenodo.22653071. Data CC BY 4.0.
 ```
 
 `CITATION.cff` at the repository root carries the same string, so GitHub's "Cite this repository" button gives you this and nothing else. It is generated from `meta`, so it cannot drift from the page or the data.
@@ -39,7 +39,7 @@ The registry is a static JSON file. There is no API to sign up for and no key to
 | Schema | https://rishsadh.com/world-model-registry/schema.json |
 | Page | https://rishsadh.com/world-model-registry |
 | Licence | Data CC BY 4.0. Code MIT. |
-| Version | 2, last verified 2026-09-29 |
+| Version | 2, last verified 2026-10-20 |
 
 The shape, in three lines. `meta` carries the version, the dates and the citation string. `exportable` and `streamed` carry one object per tool, each with quoted `commercial_rights`, `restrictive_clauses`, `sources`, a `contact_route` and a `first_listed` date. `changes`, `hosted_wrappers`, `announced` and `object_only` carry the change log, the tools that resell someone else's model, the announced but unreleased, and the out-of-scope names.
 
@@ -47,20 +47,20 @@ Every entry keeps a stable anchor. `#marble` on the page and in this file point 
 
 ## What changed
 
-The newest ten of 50. Every row carries the page it was read from and the date it was read. Full history in [CHANGELOG.md](CHANGELOG.md); an Atom feed is generated at `docs/feed.xml`.
+The newest ten of 56. Every row carries the page it was read from and the date it was read. Full history in [CHANGELOG.md](CHANGELOG.md); an Atom feed is generated at `docs/feed.xml`.
 
 | Date | Entry | Field | Was | Now | Source | Read on |
 |---|---|---|---|---|---|---|
+| 2026-10-20 | marble | tiers[0].includes, Expand worlds to larger spaces | Expand worlds to larger spaces | Expand worlds to larger spaces (conflict: the pricing page lists this under Free, in the plan card and with a check in the Free column of its comparison table, read 2026-10-20; the billing docs list "Expanding worlds to larger spaces" under "Pro plan", "Unlocks advanced workflows, including:") | [source](https://docs.worldlabs.ai/marble/support/account-billing.md) | 2026-10-20 |
+| 2026-10-20 | worldsplat | tiers[0].includes[0], star count | Repository created 27 March 2026, last pushed 28 March 2026, 3 stars (GitHub API, read 29 September 2026) | Repository created 27 March 2026, last pushed 28 March 2026, 4 stars (GitHub API, read 20 October 2026) | [source](https://api.github.com/repos/timscheuerai/worldsplat) | 2026-10-20 |
+| 2026-10-20 | decart-oasis-3 | notes, Mirage page | The Mirage page at decart.ai/mirage returned HTTP 404 on 3 September 2026; the homepage lists | The Mirage page at decart.ai/mirage returned HTTP 404 on 3 September 2026 and again on 20 October 2026, with and without www, and no replacement was found (the decart.ai homepage links to no Mirage page, the pages /lucy, /oasis and /blog and research.decart.ai do not mention it, and the Wayback Machine availability API returned no snapshot of the address on 20 October 2026); the homepage lists | [source](https://decart.ai/) | 2026-10-20 |
+| 2026-10-20 | decart-oasis-3 | sources, Mirage page URL | https://www.decart.ai/mirage | removed: the address returns HTTP 404 and no replacement page exists; the 404 is recorded in notes | [source](https://www.decart.ai/mirage) | 2026-10-20 |
+| 2026-10-20 | lingbot-world | why_no_export, GPU count | generate.py writes video; the examples run on eight GPUs. No 3D scene representation is produced. | generate.py writes video; the 14B examples run on eight GPUs and the 1.3B example on four. No 3D scene representation is produced. | [source](https://github.com/Robbyant/lingbot-world-v2) | 2026-10-20 |
+| 2026-10-20 | marble | outputs, High-quality mesh GLB, detail | One glb around 600k triangles with texture information; another glb around 1M triangles with vertex colors. Takes up to an hour to generate. Rate limited to 4 generation requests per hour per user. Typically 100-200 MB | One glb around 600k triangles with texture information; another glb around 1M triangles with vertex colors. Takes up to an hour to generate. Rate limited to 4 generation requests per hour per user. Typically 100-200 MB. The export specs page states "You can only generate high quality mesh on worlds you own" | [source](https://docs.worldlabs.ai/marble/export/specs.md) | 2026-10-20 |
 | 2026-09-30 | marble | sources, export page URL | https://docs.worldlabs.ai/marble/export.md | https://docs.worldlabs.ai/marble/export/gaussian-splat.md (the old URL now redirects here; same content) | [source](https://docs.worldlabs.ai/marble/export/gaussian-splat.md) | 2026-09-30 |
 | 2026-09-30 | beeble-3d-scene-generator | sources, pricing page URL | https://www.beeble.ai/pricing | https://beeble.ai/pricing-cloud (the old URL now redirects here; the listed prices and credits are unchanged) | [source](https://beeble.ai/pricing-cloud) | 2026-09-30 |
 | 2026-09-30 | runway-gwm-worlds | contact_route value | Runway help centre ticket, from Getting Help with your Runway Account | In-app help: an AI assistant that escalates to a person, per Getting Help with your Runway Account | [source](https://help.runwayml.com/hc/en-us/articles/20821762056723) | 2026-09-30 |
 | 2026-09-29 | marble | commercial_rights (Standard), quote, opening clause of 3.3(b) | Paid Account Users own all rights, title, and interest in and to Outputs generated through their use of the Services, ex ... | Subject to the terms, conditions, and limitations of this TOS, Paid Account Users own all rights, title, and interest in and to Outputs generated through their use of the Services, ex ... | [source](https://www.worldlabs.ai/terms-of-service) | 2026-09-29 |
-| 2026-09-29 | marble | commercial_rights (Pro and Max), quote, opening clause of 3.3(b) | Paid Account Users own all rights, title, and interest in and to Outputs generated through their use of the Services, ex ... | Subject to the terms, conditions, and limitations of this TOS, Paid Account Users own all rights, title, and interest in and to Outputs generated through their use of the Services, ex ... | [source](https://www.worldlabs.ai/terms-of-service) | 2026-09-29 |
-| 2026-09-29 | marble | notes, release cadence and ownership | Models selectable on 8 September 2026: Marble 1.0 Draft, Marble 1.0, Marble 1.1, Marble 1.1 Plus; the docs recommend Marble 1.1. The release notes page still ends at 2 April 2026, five months with no published release note, while World Labs launched Atlas on 1 September 2026. Atlas is early access with select partners and World Labs states it will power future versions of Marble. | Models selectable on 29 September 2026: Marble 1.0 Draft, Marble 1.0, Marble 1.1, Marble 1.1 Plus; the docs recommend Marble 1.1. The release notes page still ends at 2 April 2026, with no published release note since, while World Labs launched Atlas on 1 September 2026 (early access with select partners; the post states it will power future versions of Marble). On 28 September 2026 AMD announced a definitive agreement to acquire World Labs, expected to close by the end of 2026 subject to regulatory approvals; on 29 September 2026 the Terms of Service (last updated January 21, 2026) and the pricing pages did not mention AMD. | [source](https://docs.worldlabs.ai/marble/release-notes.md) | 2026-09-29 |
-| 2026-09-29 | marble | notes, AMD acquisition | not recorded | AMD announced a definitive agreement to acquire World Labs on 2026-09-28, expected to close by the end of 2026 subject to regulatory approvals. The Terms of Service last-updated date is still January 21, 2026 and the pricing pages do not mention AMD. | [source](https://ir.amd.com/news-events/press-releases/detail/1299/amd-to-acquire-world-labs-to-advance-the-future-of-ai-compute) | 2026-09-29 |
-| 2026-09-29 | hunyuanworld-1-0 | tiers[1].includes[0], hosted demo page state | Page returned no readable content to the fetcher and showed only a loading spinner in a browser on 3 September 2026 | Page returned no readable content to the fetcher and showed only a loading spinner in a browser on 3 September 2026; on 29 September 2026 the page redirected to a login page with the text "登录后开启3D创作之旅" and showed no price or plan | [source](https://3d.hunyuan.tencent.com/sceneTo3D) | 2026-09-29 |
-| 2026-09-29 | hy-world-2-0 | tiers[1].includes[2], hosted product page state | Page showed only a loading spinner in a browser on 3 September 2026 | Page showed only a loading spinner in a browser on 3 September 2026; on 29 September 2026 the page redirected to a login page with the text "登录后开启3D创作之旅" and showed no price or plan | [source](https://3d.hunyuan.tencent.com/sceneTo3D) | 2026-09-29 |
-| 2026-09-29 | hy-world-1-5-worldplay | price, hosted demo page state | the page showed only a loading spinner on 3 September 2026. | the page showed only a loading spinner on 3 September 2026 and on 29 September 2026 redirected to a login page with no price shown. | [source](https://3d.hunyuan.tencent.com/sceneTo3D) | 2026-09-29 |
 
 ## Exportable
 
@@ -68,7 +68,7 @@ The tool hands you a file you can take away.
 
 | Tool | Vendor | You get | Price | Commercial use | Runs locally | Last verified |
 |---|---|---|---|---|---|---|
-| [Marble](#marble) | World Labs | Gaussian splat (SPZ, PLY), 360 panorama PNG, collider mesh GLB, high-quality mesh GLB (Pro), video render | $0, $20, $35, $95 per month; API $1.00 per 1,250 credits, one world 1,500 credits | Terms: any paid account owns output. Pricing page: commercial rights listed under Pro only. Conflict recorded. | No. Hosted web app and API. | 2026-09-29 |
+| [Marble](#marble) | World Labs | Gaussian splat (SPZ, PLY), 360 panorama PNG, collider mesh GLB, high-quality mesh GLB (Pro), video render | $0, $20, $35, $95 per month; API $1.00 per 1,250 credits, one world 1,500 credits | Terms: any paid account owns output. Pricing page: commercial rights listed under Pro only. Conflict recorded. | No. Hosted web app and API. | 2026-10-20 |
 | [HunyuanWorld 1.0](#hunyuanworld-1-0) | Tencent Hunyuan | Layered triangle meshes as PLY (one file per layer), optional Draco DRC, plus the 360 panorama PNG | Free download, self-hosted. Hosted demo price not published. | Community licence: outputs are yours; not licensed in the EU, UK or South Korea; licence needed above 1M monthly active users | Yes. Lite fp8 build stated to run on consumer GPUs such as the RTX 4090; VRAM figure not published. | 2026-09-29 |
 | [HunyuanWorld-Voyager](#hunyuanworld-voyager) | Tencent Hunyuan | RGB-D video along a chosen camera path, convertible to a PLY point cloud | Free download, self-hosted | Community licence: outputs are yours; not licensed in the EU, UK or South Korea; licence needed above 1M monthly active users | Yes. Minimum 60 GB GPU memory for 540p; 80 GB recommended. | 2026-09-29 |
 | [HunyuanWorld-Mirror (HunyuanWorld 1.1)](#hunyuanworld-mirror) | Tencent Hunyuan | 3D Gaussians as gaussians.ply, point clouds, depth, normals, camera parameters, COLMAP export | Free download, self-hosted. Hugging Face Space demo. | Community licence: outputs are yours; not licensed in the EU, UK or South Korea; licence needed above 1M monthly active users | Yes. VRAM figure not published. | 2026-09-29 |
@@ -76,7 +76,7 @@ The tool hands you a file you can take away.
 | [Matrix-3D](#matrix-3d) | Skywork AI | Panoramic video MP4 and a Gaussian splat PLY of the scene | Free download, self-hosted | MIT for code and weights; the licence does not mention outputs. Text-to-panorama is a LoRA on FLUX.1-dev, whose Hugging Face licence name is non-commercial. | Yes. Minimum 16 GB VRAM for the whole pipeline; 12 GB with the 5B model in low-VRAM mode; PanoLRM needs about 80 GB. | 2026-09-29 |
 | [FlashWorld](#flashworld) | FlashWorld authors (Xinyang Li and others, with the Hunyuan-World team) | Gaussian splat as SPZ and PLY, plus a video | Free download, self-hosted. Hugging Face Space demo. | Code is Apache-2.0 on GitHub; the weights' Hugging Face card is tagged CC BY-NC-SA 4.0. Conflict recorded. | Yes. 51 GB at full speed on an A800; 24 GB with offload flags; below 10 GB with --offload_vae at about 10 minutes per scene. | 2026-09-29 |
 | [WorldGen](#worldgen) | Ziyang Xie | Gaussian splat PLY, or a mesh PLY in mesh mode | Free download, self-hosted | Apache-2.0 for code and weights; the licence does not mention outputs. Requires accepting the FLUX.1-dev licence, whose Hugging Face licence name is non-commercial. | Yes. Low-VRAM mode uses about 10 GB; set low_vram if under 24 GB. | 2026-09-29 |
-| [WorldSplat](#worldsplat) | timscheuerai | Gaussian splat PLY with COLMAP camera poses and a self-contained viewer page | Free download, self-hosted | Apache 2.0 per the README. The pose step depends on MASt3R, which is CC BY-NC-SA 4.0. | Yes. 12 GB VRAM minimum, 24 GB recommended. | 2026-09-29 |
+| [WorldSplat](#worldsplat) | timscheuerai | Gaussian splat PLY with COLMAP camera poses and a self-contained viewer page | Free download, self-hosted | Apache 2.0 per the README. The pose step depends on MASt3R, which is CC BY-NC-SA 4.0. | Yes. 12 GB VRAM minimum, 24 GB recommended. | 2026-10-20 |
 
 ## Streamed only
 
@@ -85,12 +85,12 @@ The tool shows you a world and gives you no file.
 | Tool | Vendor | What it shows | Why nothing exports | Price | Last verified |
 |---|---|---|---|---|---|
 | [Odyssey-2 (Odyssey-2 Pro API, Odyssey-2 Max, Agora-1)](#odyssey) | Odyssey | Interactive video simulation from text or an image. API docs: streams 720P video at 22 FPS, a new frame every 50 milliseconds, minutes long. The consumer page at experience.odyssey.ml shows a prompt box and an 8:00 timer; the odyssey.systems home page is a corporate page with no prompt box. Agora-1 puts up to four players in one generated world. | The API License Agreement defines Output Data as a streamed audiovisual output. The 23-page API docs index has interactive streams, viewable streams, simulations and recordings; recordings return a video URL, an events log, a thumbnail and a preview. No 3D asset endpoint is documented. Per-stream limit 150 seconds, per-connection 60 minutes. | not published. Consumer page shows no price; the API agreement says fees are set per Order and can change; the docs index has no pricing page. | 2026-09-29 |
-| [Oasis 3 Preview](#decart-oasis-3) | Decart | A real-time promptable world model aimed at driving simulation: set a scene with text, send throttle and steering actions, get generated camera frames back. Product page: resolution 512x768x3, 22 FPS, under 200ms latency, three synchronised camera views. A browser demo runs at oasis3-preview.decart.ai. | The API returns four RGB frames per stream per call as H x W x 3 uint8 arrays over gRPC. No scene file or 3D asset is produced; the SDK's frame_consumer lets you record frames yourself. | $0.02/sec for Oasis 3 Preview realtime (docs pricing page). No subscriptions and no minimum spend. New accounts receive free credits for evaluation. | 2026-09-29 |
+| [Oasis 3 Preview](#decart-oasis-3) | Decart | A real-time promptable world model aimed at driving simulation: set a scene with text, send throttle and steering actions, get generated camera frames back. Product page: resolution 512x768x3, 22 FPS, under 200ms latency, three synchronised camera views. A browser demo runs at oasis3-preview.decart.ai. | The API returns four RGB frames per stream per call as H x W x 3 uint8 arrays over gRPC. No scene file or 3D asset is produced; the SDK's frame_consumer lets you record frames yourself. | $0.02/sec for Oasis 3 Preview realtime (docs pricing page). No subscriptions and no minimum spend. New accounts receive free credits for evaluation. | 2026-10-20 |
 | [Project Genie (Genie 3)](#project-genie) | Google DeepMind and Google Labs | A real-time interactive world from a text prompt, an uploaded or generated image, or a Street View location. Model page: photorealistic worlds at 720p resolution, 20-24 frames per second. Help page: 30 seconds to create a world and 60 seconds to explore it. | Google's launch post: Once you're done, you can download videos of your worlds and your explorations. The help page offers Download a video of your experience, Revisit the world and Reuse your prompts. No 3D file is offered. | Bundled with Google AI Ultra. Google's 19 May 2026 post: the top AI Ultra plan reduced from $250 to $200 per month, a new $100 per month AI Ultra plan for developers, and Project Genie is now rolling out to all eligible AI Ultra $200 subscribers who are 18 or older. Help page: you will not need to use your AI credits to generate worlds. Google's plans page renders prices client-side and showed placeholders to the fetcher. | 2026-09-29 |
 | [GWM Worlds (GWM-1)](#runway-gwm-worlds) | Runway | Research post, 11 December 2025: an autoregressive model built on Gen-4.5 that generates frame by frame, runs in real time, and is controlled with camera pose, robot commands or audio. GWM Worlds generates an immersive, infinite, explorable space as you move through it, with geometry, lighting, physics. Up to 2 minutes of video at 720p. Research post, 3 September 2026, GWM Worlds 2 (Research Preview): "Interactive worlds generated in real time: continuous 720p video at 24 fps and audio at 48,000 Hz, responding to your inputs as you explore." | The output is real-time video frames. Access to GWM-1 is by an early access form on the research page; the robotics variant is by a Get Access contact form. No export, file format or self-serve product page is published, and the pricing page lists no GWM plan. The GWM Worlds 2 post states no access route, price or export format. | not published. Runway's pricing page (Creative plans: Free $0, Standard $15 or $12 annual, Pro $35 or $28 annual, Max $95 or $76 annual per month) does not mention GWM. | 2026-09-29 |
 | [Matrix-Game 3.0](#matrix-game-3) | Skywork AI | Open-weights interactive world model for 720p real-time long-form video from an input image and a text prompt, driven by actions. README: 40fps real-time generation at 720p resolution with a 5B model, minute-long sequences with memory. Released 27 March 2026. | generate.py outputs video frames (57 plus 40 per iteration); no 3D scene representation is produced by the released code. | Free download, self-hosted. Repository root LICENSE is MIT (Copyright (c) 2025 SkyworkAI and contributors); Matrix-Game-3/LICENSE.txt and the Matrix-Game-3 README say Apache License 2.0; the Hugging Face card is tagged apache-2.0. Hardware: A and H series GPUs tested, 64 GB RAM, Linux. | 2026-09-29 |
 | [HY-World 1.5 (WorldPlay)](#hy-world-1-5-worldplay) | Tencent Hunyuan | A streaming video diffusion model for real-time interactive worlds from a single image or text prompt, driven by keyboard and mouse actions. README: long-horizon streaming video at 24 FPS; 480P image-to-video checkpoints; first-person and third-person views. Hosted demo at 3d.hunyuan.tencent.com/sceneTo3D?tab=worldplay. | The model predicts the next chunk of 16 video frames; the released inference code writes video. The README lists 3D reconstruction as an application, not as an output. | Free download, self-hosted under the Tencent HY-WorldPlay Community License Agreement (release date December 17, 2025; same territory exclusion of the EU, UK and South Korea, and the 1 million monthly active user clause, as HunyuanWorld 1.0). GPU memory for the distilled model at 125 frames: 28G with sp=8, 34G with sp=4, 72G with sp=1. Hosted demo price not published; the page showed only a loading spinner on 3 September 2026 and on 29 September 2026 redirected to a login page with no price shown. | 2026-09-29 |
-| [LingBot-World and LingBot-World 2.0 (Infinity)](#lingbot-world) | Robbyant | Open-weights interactive world simulator from an image, a text prompt and optional camera or action signals. Version 1 (29 January 2026): 480P and 720P, 16 frames per second, under 1 second latency. Version 2 (9 July 2026): 720p video streams at 60 fps with the distilled real-time variant, 14B causal-fast model. The version 2 README News dated Sep. 10, 2026 lists the remaining variants: 14B causal-pretrained, 14B bidirectional and 1.3B causal-fast. Hosted real-time demos through third parties Reactor (web, per the README; the project page says PC) and LingGuang (mobile). | generate.py writes video; the examples run on eight GPUs. No 3D scene representation is produced. | Free download. Version 1 repository is Apache-2.0 and marked no longer actively maintained. Version 2 README: licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0), available for non-commercial use only. Reactor and LingGuang prices not published. | 2026-09-29 |
+| [LingBot-World and LingBot-World 2.0 (Infinity)](#lingbot-world) | Robbyant | Open-weights interactive world simulator from an image, a text prompt and optional camera or action signals. Version 1 (29 January 2026): 480P and 720P, 16 frames per second, under 1 second latency. Version 2 (9 July 2026): 720p video streams at 60 fps with the distilled real-time variant, 14B causal-fast model. The version 2 README News dated Sep. 10, 2026 lists the remaining variants: 14B causal-pretrained, 14B bidirectional and 1.3B causal-fast. Hosted real-time demos through third parties Reactor (web, per the README; the project page says PC) and LingGuang (mobile). | generate.py writes video; the 14B examples run on eight GPUs and the 1.3B example on four. No 3D scene representation is produced. | Free download. Version 1 repository is Apache-2.0 and marked no longer actively maintained. Version 2 README: licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0), available for non-commercial use only. Reactor and LingGuang prices not published. | 2026-10-20 |
 
 ## Hosted wrappers
 
@@ -110,8 +110,8 @@ Announced by its vendor but not released, so there is no file, price or licence 
 | Tool | Vendor | Announced | Access | Why it is not listed above | Last verified |
 |---|---|---|---|---|---|
 | [Atlas](#worldlabs-atlas) | World Labs | 2026-09-01 | Early access by request. The post carries a "Request early access to Atlas" action and no self-serve sign-up. | No price, no export specification and no terms of its own are published, so there is nothing to record in the exportable or streamed columns. The post says "Atlas will power future versions of Marble and other products from World Labs." | 2026-09-29 |
-| [WorldGen (Meta)](#meta-worldgen) | Meta | 2025-11-20 | Paper only. arXiv records "[Submitted on 20 Nov 2025]" and lists no code, weights, demo or product page. Meta's blog post dated 21 Nov 2025 says "While this work is still in the research phase and not available to developers". | Nothing is released to use, so there is no file, price or licence to record. Title: "WorldGen: From Text to Traversable and Interactive 3D Worlds". | 2026-09-29 |
-| [Hunyuan3D-WorldClaw](#hunyuan3d-worldclaw) | Tencent Hunyuan | 2026-08-07 | Paper and project page only. The repository README news line reads "2026.08.07: Paper and project page are released!" and the repository holds a README and images, with no code, weights or licence file at the time of reading. | Nothing is released to use, so there is no file, price or licence to record. Project page: "an agentic framework that turns one open-ended prompt into an explicit, explorable, and editable open-world 3D scene." README title: "WorldClaw: Agentic 3D Open-world Generation at Scale". | 2026-09-29 |
+| [WorldGen (Meta)](#meta-worldgen) | Meta | 2025-11-20 | Paper only. arXiv records "[Submitted on 20 Nov 2025]" and lists no code, weights, demo or product page. Meta's blog post dated 21 Nov 2025 says "While this work is still in the research phase and not available to developers". | Nothing is released to use, so there is no file, price or licence to record. Title: "WorldGen: From Text to Traversable and Interactive 3D Worlds". | 2026-10-20 |
+| [Hunyuan3D-WorldClaw](#hunyuan3d-worldclaw) | Tencent Hunyuan | 2026-08-07 | Paper and project page only. The repository README news line reads "2026.08.07: Paper and project page are released!" and the repository holds a README and images, with no code, weights or licence file at the time of reading. | Nothing is released to use, so there is no file, price or licence to record. Project page: "an agentic framework that turns one open-ended prompt into an explicit, explorable, and editable open-world 3D scene." README title: "WorldClaw: Agentic 3D Open-world Generation at Scale". | 2026-10-20 |
 
 ## Object-level, out of scope
 
@@ -143,7 +143,7 @@ Rish Sadh, founder of Reidify, an AI-first design studio in Mumbai.
 
 <a id="marble"></a>
 
-Vendor: [World Labs](https://www.worldlabs.ai/). Last verified 2026-09-29.
+Vendor: [World Labs](https://www.worldlabs.ai/). Last verified 2026-10-20.
 
 **Inputs**
 
@@ -160,12 +160,12 @@ Vendor: [World Labs](https://www.worldlabs.ai/). Last verified 2026-09-29.
 - Gaussian splat, PLY: About 2M splats; low-res option about 500k splats. Uncompressed, broader software compatibility. Tier: Standard and above. API: PLY splat exports are free
 - 360 panorama, PNG: Equirectangular png of 2560 x 1280 pixels. Tier: Standard and above
 - Collider mesh, GLB: Coarse mesh optimised for simple physics calculations, 100-200k triangles, typically 3-4 MB. Tier: Standard and above
-- High-quality mesh, GLB: One glb around 600k triangles with texture information; another glb around 1M triangles with vertex colors. Takes up to an hour to generate. Rate limited to 4 generation requests per hour per user. Typically 100-200 MB. Tier: Pro and above. API: 3,500 credits ($2.80) per world
+- High-quality mesh, GLB: One glb around 600k triangles with texture information; another glb around 1M triangles with vertex colors. Takes up to an hour to generate. Rate limited to 4 generation requests per hour per user. Typically 100-200 MB. The export specs page states "You can only generate high quality mesh on worlds you own". Tier: Pro and above. API: 3,500 credits ($2.80) per world
 - Video render: Record mode in Studio with export settings for quality, resolution, aspect ratio, frame rate and codec (release notes, 11 December 2025). Tier: Not stated on the pricing page. Pro adds Enhance rendered video outputs
 
 **Tiers, as published**
 
-- Free: 0 USD per month. 7,000 credits Up to 4 world generations Text input Image input Multi-image input 360 panorama input Advanced create flow with editing "Chisel" mode for 3D layout control Expand worlds to larger spaces ([price page](https://marble.worldlabs.ai/pricing))
+- Free: 0 USD per month. 7,000 credits Up to 4 world generations Text input Image input Multi-image input 360 panorama input Advanced create flow with editing "Chisel" mode for 3D layout control Expand worlds to larger spaces (conflict: the pricing page lists this under Free, in the plan card and with a check in the Free column of its comparison table, read 2026-10-20; the billing docs list "Expanding worlds to larger spaces" under "Pro plan", "Unlocks advanced workflows, including:") ([price page](https://marble.worldlabs.ai/pricing))
 - Standard: 20 USD per month. 20,000 credits Up to 12 world generations Everything in Free, plus: Video input Export splat files Export 360 panoramas Export low-resolution collider meshes Community asset downloads Purchase top-up credits Draft mode for faster iteration ([price page](https://marble.worldlabs.ai/pricing))
 - Pro: 35 USD per month. 40,000 credits Up to 25 world generations Everything in Standard, plus: Enhance rendered video outputs Export high-resolution textured meshes Commercial rights ([price page](https://marble.worldlabs.ai/pricing))
 - Max: 95 USD per month. 120,000 credits Up to 75 world generations Everything in Pro ([price page](https://marble.worldlabs.ai/pricing))
@@ -575,7 +575,7 @@ Vendor: [Ziyang Xie](https://worldgen.github.io/). Last verified 2026-09-29.
 
 <a id="worldsplat"></a>
 
-Vendor: [timscheuerai](https://github.com/timscheuerai/worldsplat). Last verified 2026-09-29.
+Vendor: [timscheuerai](https://github.com/timscheuerai/worldsplat). Last verified 2026-10-20.
 
 **Inputs**
 
@@ -590,7 +590,7 @@ Vendor: [timscheuerai](https://github.com/timscheuerai/worldsplat). Last verifie
 
 **Tiers, as published**
 
-- Open-source release: 0 USD per not applicable. Repository created 27 March 2026, last pushed 28 March 2026, 3 stars (GitHub API, read 29 September 2026) Compute is the user's own cost ([price page](https://github.com/timscheuerai/worldsplat))
+- Open-source release: 0 USD per not applicable. Repository created 27 March 2026, last pushed 28 March 2026, 4 stars (GitHub API, read 20 October 2026) Compute is the user's own cost ([price page](https://github.com/timscheuerai/worldsplat))
 
 **Licence:** [Apache 2.0 (README; the GitHub API reports the licence as NOASSERTION)](https://github.com/timscheuerai/worldsplat/blob/master/LICENSE)
 
@@ -661,7 +661,7 @@ Vendor: [Odyssey](https://odyssey.systems/). Last verified 2026-09-29.
 
 <a id="decart-oasis-3"></a>
 
-Vendor: [Decart](https://www.decart.ai/). Last verified 2026-09-29.
+Vendor: [Decart](https://www.decart.ai/). Last verified 2026-10-20.
 
 **What it shows:** A real-time promptable world model aimed at driving simulation: set a scene with text, send throttle and steering actions, get generated camera frames back. Product page: resolution 512x768x3, 22 FPS, under 200ms latency, three synchronised camera views. A browser demo runs at oasis3-preview.decart.ai.
 
@@ -677,7 +677,7 @@ Vendor: [Decart](https://www.decart.ai/). Last verified 2026-09-29.
 - Training licence, API terms. Section API Terms of Service, 2.3: "You acknowledge the foregoing means Decart.ai may use Inputs and Outputs to train and improve our artificial intelligence models, algorithms, and related technology, products, and services and may reuse and generate the Input and Output as part of its training data in its sole discretion." ([source](https://docs.platform.decart.ai/resources/api-terms.md))
 - Restrictions, API terms. Section API Terms of Service, 3.6(c) and 3.6(f): "(c) sell, sublicense, or otherwise provide the API, Decart.ai Models or Output to third parties without Decart.ai's prior written consent; [...] (f) allow access to the API, Decart.ai Models or Services from any other source other than as described in the Developer Application" ([source](https://docs.platform.decart.ai/resources/api-terms.md))
 
-**Notes:** No benchmarking or competitive-analysis clause was found in either Decart document. The Mirage page at decart.ai/mirage returned HTTP 404 on 3 September 2026; the homepage lists Lucy 2.5 as a video editing model and Oasis 3 as the world model. Access is by API key from platform.decart.ai.
+**Notes:** No benchmarking or competitive-analysis clause was found in either Decart document. The Mirage page at decart.ai/mirage returned HTTP 404 on 3 September 2026 and again on 20 October 2026, with and without www, and no replacement was found (the decart.ai homepage links to no Mirage page, the pages /lucy, /oasis and /blog and research.decart.ai do not mention it, and the Wayback Machine availability API returned no snapshot of the address on 20 October 2026); the homepage lists Lucy 2.5 as a video editing model and Oasis 3 as the world model. Access is by API key from platform.decart.ai.
 
 **Sources**
 
@@ -688,7 +688,6 @@ Vendor: [Decart](https://www.decart.ai/). Last verified 2026-09-29.
 - https://docs.platform.decart.ai/resources/faq.md
 - https://decart.ai/terms
 - https://docs.platform.decart.ai/resources/api-terms.md
-- https://www.decart.ai/mirage
 - https://www.decart.ai/lucy
 
 ### Project Genie (Genie 3)
@@ -797,11 +796,11 @@ Vendor: [Tencent Hunyuan](https://3d-models.hunyuan.tencent.com/world/). Last ve
 
 <a id="lingbot-world"></a>
 
-Vendor: [Robbyant](https://technology.robbyant.com/lingbot-world-v2). Last verified 2026-09-29.
+Vendor: [Robbyant](https://technology.robbyant.com/lingbot-world-v2). Last verified 2026-10-20.
 
 **What it shows:** Open-weights interactive world simulator from an image, a text prompt and optional camera or action signals. Version 1 (29 January 2026): 480P and 720P, 16 frames per second, under 1 second latency. Version 2 (9 July 2026): 720p video streams at 60 fps with the distilled real-time variant, 14B causal-fast model. The version 2 README News dated Sep. 10, 2026 lists the remaining variants: 14B causal-pretrained, 14B bidirectional and 1.3B causal-fast. Hosted real-time demos through third parties Reactor (web, per the README; the project page says PC) and LingGuang (mobile).
 
-**Why nothing exports:** generate.py writes video; the examples run on eight GPUs. No 3D scene representation is produced.
+**Why nothing exports:** generate.py writes video; the 14B examples run on eight GPUs and the 1.3B example on four. No 3D scene representation is produced.
 
 **Price:** Free download. Version 1 repository is Apache-2.0 and marked no longer actively maintained. Version 2 README: licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0), available for non-commercial use only. Reactor and LingGuang prices not published.
 
@@ -925,7 +924,7 @@ Vendor: [World Labs](https://www.worldlabs.ai/). Announced 2026-09-01. Last veri
 
 <a id="meta-worldgen"></a>
 
-Vendor: [Meta](https://arxiv.org/abs/2511.16825). Announced 2025-11-20. Last verified 2026-09-29.
+Vendor: [Meta](https://arxiv.org/abs/2511.16825). Announced 2025-11-20. Last verified 2026-10-20.
 
 **Access:** Paper only. arXiv records "[Submitted on 20 Nov 2025]" and lists no code, weights, demo or product page. Meta's blog post dated 21 Nov 2025 says "While this work is still in the research phase and not available to developers".
 
@@ -941,7 +940,7 @@ Vendor: [Meta](https://arxiv.org/abs/2511.16825). Announced 2025-11-20. Last ver
 
 <a id="hunyuan3d-worldclaw"></a>
 
-Vendor: [Tencent Hunyuan](https://github.com/Tencent-Hunyuan/Hunyuan3D-WorldClaw). Announced 2026-08-07. Last verified 2026-09-29.
+Vendor: [Tencent Hunyuan](https://github.com/Tencent-Hunyuan/Hunyuan3D-WorldClaw). Announced 2026-08-07. Last verified 2026-10-20.
 
 **Access:** Paper and project page only. The repository README news line reads "2026.08.07: Paper and project page are released!" and the repository holds a README and images, with no code, weights or licence file at the time of reading.
 

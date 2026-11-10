@@ -2,7 +2,7 @@
   "meta": {
     "title": "World Model Registry",
     "version": "2",
-    "last_verified": "2026-10-20",
+    "last_verified": "2026-11-10",
     "scope": "Tools that generate a navigable scene or world from text, images or video. Exportable: the tool hands you a file. Streamed only: the tool shows you a world and gives you no file. Object-level generators are listed by name and not covered.",
     "canonical_url": "https://rishsadh.com/world-model-registry",
     "json_url": "https://rishsadh.com/world-model-registry/registry.json",
@@ -12,6 +12,15 @@
     "doi": "10.5281/zenodo.22653071"
   },
   "changes": [
+    {
+      "date": "2026-11-10",
+      "entry_id": "lingbot-world",
+      "field": "price, hosted-provider pricing suffix",
+      "was": "Reactor and LingGuang prices not published.",
+      "now": "Reactor's hosted LingBot World 2 page lists $0.007/sec ($0.42/minute), read 2026-11-10; this rate is specific to World 2, not version 1. LingGuang price not published.",
+      "source": "https://www.reactor.inc/models/lingbot-world-2",
+      "read_on": "2026-11-10"
+    },
     {
       "date": "2026-10-20",
       "entry_id": "marble",
@@ -2130,16 +2139,17 @@
       "category": "streamed",
       "what_it_shows": "Open-weights interactive world simulator from an image, a text prompt and optional camera or action signals. Version 1 (29 January 2026): 480P and 720P, 16 frames per second, under 1 second latency. Version 2 (9 July 2026): 720p video streams at 60 fps with the distilled real-time variant, 14B causal-fast model. The version 2 README News dated Sep. 10, 2026 lists the remaining variants: 14B causal-pretrained, 14B bidirectional and 1.3B causal-fast. Hosted real-time demos through third parties Reactor (web, per the README; the project page says PC) and LingGuang (mobile).",
       "why_no_export": "generate.py writes video; the 14B examples run on eight GPUs and the 1.3B example on four. No 3D scene representation is produced.",
-      "price": "Free download. Version 1 repository is Apache-2.0 and marked no longer actively maintained. Version 2 README: licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0), available for non-commercial use only. Reactor and LingGuang prices not published.",
+      "price": "Free download. Version 1 repository is Apache-2.0 and marked no longer actively maintained. Version 2 README: licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0), available for non-commercial use only. Reactor's hosted LingBot World 2 page lists $0.007/sec ($0.42/minute), read 2026-11-10; this rate is specific to World 2, not version 1. LingGuang price not published.",
       "notes": "The version 1 README says the codebase is built on Wan2.2. Skywork's Matrix-Game 3.0 README credits lingbot-world for its context parallel framework. The version 2 README gives 480P on 8 GPUs for the 14B causal_fast model and 480P on 4 GPUs for the 1.3B causal_fast model, and states \"We do NOT plan to release our deployment code.\"",
-      "last_verified": "2026-10-20",
+      "last_verified": "2026-11-10",
       "sources": [
         "https://github.com/Robbyant/lingbot-world",
         "https://github.com/Robbyant/lingbot-world-v2",
         "https://huggingface.co/api/models/robbyant/lingbot-world-v2-14b-causal-fast",
         "https://huggingface.co/api/models/robbyant/lingbot-world-v2-14b-causal-pretrain",
         "https://huggingface.co/api/models/robbyant/lingbot-world-v2-14b-bid",
-        "https://huggingface.co/api/models/robbyant/lingbot-world-v2-1.3b-causal-fast"
+        "https://huggingface.co/api/models/robbyant/lingbot-world-v2-1.3b-causal-fast",
+        "https://www.reactor.inc/models/lingbot-world-2"
       ],
       "contact_route": {
         "type": "issues",
